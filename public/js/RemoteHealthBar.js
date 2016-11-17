@@ -16,8 +16,8 @@ HealthBar.prototype.setupConfiguration = function (providedConfig) {
 
 HealthBar.prototype.mergeWithDefaultConfiguration = function(newConfig) {
     var defaultConfig= {
-        width: 250,
-        height: 5,
+        width: 80,
+        height: 6,
         x: 0,
         y: 0,
         bg: {
@@ -26,7 +26,7 @@ HealthBar.prototype.mergeWithDefaultConfiguration = function(newConfig) {
         bar: {
             color: '#FEFF03'
         },
-        animationDuration: 200,
+        animationDuration: 100,
         flipped: false,
         isFixedToCamera: false
     };

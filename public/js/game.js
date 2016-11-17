@@ -26,6 +26,7 @@ var healthTime = 0
 var ver1
 var ver2
 var newLaser
+var newLasers
 var rock
 var healthbar
 

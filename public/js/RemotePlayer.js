@@ -8,8 +8,8 @@ var RemotePlayer = function (index, game, player, healthbar, startX, startY, sta
   var health = startHealth
 
   this.game = game
-  this.healthbar = healthbar
-  //this.health = 3
+  //this.healthbar = healthbar
+  this.health = startHealth
   this.player = player
   this.alive = true
 
@@ -31,6 +31,11 @@ var RemotePlayer = function (index, game, player, healthbar, startX, startY, sta
 
   this.player.angle = angle
 
+  var barConfig = {x: 0, y: -80};
+  this.healthbar = new HealthBar(game, barConfig);
+  this.player.addChild(this.healthbar.bgSprite)
+  this.player.addChild(this.healthbar.barSprite)  
+
   this.lastPosition = { x: x, y: y, angle: angle }
   
 }
@@ -46,7 +51,7 @@ RemotePlayer.prototype.update = function () {
   this.lastPosition.x = this.player.x
   this.lastPosition.y = this.player.y
   this.lastPosition.angle = this.player.angle
-
+  this.healthbar.setPercent(this.health) 
 }
 
 
