@@ -1,0 +1,21 @@
+{
+  "name": "EpicSpaceBattle",
+  "version": "1.0.0",
+  "description": "Epic Space Battle Multiplayer Game!",
+  "main": "lib/game.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
+    "lint": "standard --verbose | snazzy"
+  },
+  "author": "Beau Costoff",
+  "license": "MIT",
+  "dependencies": {
+    "ecstatic": "^1.0.1",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^0.7.10",
+    "standard": "^5.3.1"
+  }
+}
