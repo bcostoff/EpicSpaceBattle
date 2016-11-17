@@ -269,13 +269,13 @@ function laserById (id) {
   return false
 }
 
-function damageEnemy(laser, enemy){
-  //console.log(enemy.name)
-    // console.log('Enemy Hit!')
-    // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
-    socket.emit('take damage', { damageType: 'laser', enemy: enemy.name, laser: laser.name })
-    laser.kill();   
-    // }
+function damageEnemy(e, l){
+  //console.log(e.name)
+  // console.log('Enemy Hit!')
+  // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
+  //socket.emit('take damage', { damageType: 'laser', enemy: enemy.name, laser: newLaser.name })
+  l.kill();   
+  // }
 }
 
 
@@ -283,11 +283,10 @@ function crashPlayers(player, enemy){
   //console.log(enemy.name)
     // console.log('Enemy Hit!')
     // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
-    socket.emit('take damage', { damageType: 'laser', enemy: enemy.name, laser: laser.name })
-    laser.kill();   
+    //socket.emit('take damage', { damageType: 'laser', enemy: enemy.name, laser: laser.name })
+    //laser.kill();   
     // }
 }
-
 // function changeHealth(player, rock){
 //   if(game.time.now > healthTime){
 //     oldHealth = healthbar.getPercentage();
