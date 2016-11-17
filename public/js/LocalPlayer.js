@@ -38,9 +38,9 @@ LocalPlayer.prototype.update = function () {
         
 
         if(cursors.left.isDown){
-            this.player.angle -= 4
+            this.player.angle -= 2
         }else if(cursors.right.isDown) {
-            this.player.angle += 4
+            this.player.angle += 2
         }
 
 
