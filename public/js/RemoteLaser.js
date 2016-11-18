@@ -10,7 +10,7 @@ var RemoteLaser = function (index, game, laser, startX, startY, startAngle) {
   this.laser = laser
 
   this.laser = game.add.sprite(x, y, 'laser')
-  this.laser.anchor.setTo(0.6, 0.5)
+  this.laser.anchor.setTo(0.55, 0.5)
   this.laser.name = index.toString()
   this.laser.lifespan = 2000;
   this.laser.angle = angle
