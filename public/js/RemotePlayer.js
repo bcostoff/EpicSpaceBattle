@@ -1,6 +1,6 @@
 /* global game */
 
-var RemotePlayer = function (index, game, player, healthbar, startX, startY, startAngle, startVer, startHealth) {
+var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth) {
   var x = startX
   var y = startY
   var angle = startAngle
@@ -8,9 +8,7 @@ var RemotePlayer = function (index, game, player, healthbar, startX, startY, sta
   var health = startHealth
 
   this.game = game
-  //this.healthbar = healthbar
   this.health = startHealth
-  this.player = player
   this.alive = true
 
   if(ver == 1){
@@ -51,7 +49,10 @@ RemotePlayer.prototype.update = function () {
   this.lastPosition.x = this.player.x
   this.lastPosition.y = this.player.y
   this.lastPosition.angle = this.player.angle
-  this.healthbar.setPercent(this.health) 
+}
+
+RemotePlayer.prototype.takeDamage = function (health) {
+  this.healthbar.setPercent(health) 
 }
 
 

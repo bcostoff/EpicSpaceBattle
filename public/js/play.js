@@ -154,7 +154,7 @@ function onNewPlayer (data) {
     return
   }
   // Add new player to the remote players array
-  enemies.push(new RemotePlayer(data.id, game, player.sprite, healthbar, data.x, data.y, data.angle, data.ver, data.health))
+  enemies.push(new RemotePlayer(data.id, game, data.x, data.y, data.angle, data.ver, data.health))
 }
 
 // Move player
@@ -179,25 +179,23 @@ function onTakeDamage (data) {
   //Kill Laser
   data.laser.kill()
 
-  // var damagePlayer = playerById(data.id)
+  var damagePlayer = playerById(data.id)
 
-  // // Player not found
-  // if (!damagePlayer) {
-  //   console.log('Player not found: ', data.id)
-  //   return
-  // }
+  // Player not found
+  if (!damagePlayer) {
+    console.log('Player not found: ', data.id)
+    return
+  }
 
-  // // Update player position
-  // damagePlayer.player.x = data.x
-  // damagePlayer.player.y = data.y
-  // damagePlayer.player.angle = data.angle
+  // Update player health
+  damagePlayer.takeDamage(data.health)
   
-  if(data.health == 0){
-    //socket.emit('disconnect')
-    game.state.start('dead');    
-  }else{
-    player.takeDamage(data.health)
-  }  
+  // if(data.health == 0){
+  //   //socket.emit('disconnect')
+  //   game.state.start('dead');    
+  // }else{
+  //   player.takeDamage(data.health)
+  // }  
 }
 
 // New laser
