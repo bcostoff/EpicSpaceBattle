@@ -31,12 +31,12 @@ var RemotePlayer = function (index, game, player, healthbar, startX, startY, sta
 
   this.player.angle = angle
 
-  var barConfig = {x: 0, y: 0};
+  var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
   this.player.addChild(this.healthbar.bgSprite)
   this.player.addChild(this.healthbar.barSprite)  
 
-  this.lastPosition = { x: x, y: y, angle: angle }
+  this.lastPosition = { x: x, y: y, angle: angle, health: health }
   
 }
 
