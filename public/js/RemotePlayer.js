@@ -52,7 +52,11 @@ RemotePlayer.prototype.update = function () {
 }
 
 RemotePlayer.prototype.takeDamage = function (health) {
-  this.healthbar.setPercent(health) 
+  if(health == 0){
+    this.player.kill();  
+  }else{
+    this.healthbar.setPercent(health) 
+  }  
 }
 
 

@@ -106,7 +106,12 @@ LocalPlayer.prototype.fireLaser = function () {
 
 
 LocalPlayer.prototype.takeDamage = function (health) {
-  this.healthbar.setPercent(health) 
+  if(health == 0){
+    socket.emit('disconnect')
+    game.state.start('dead');    
+  }else{
+    this.healthbar.setPercent(health) 
+  }  
 }
 
 
