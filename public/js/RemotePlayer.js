@@ -26,7 +26,7 @@ var RemotePlayer = function (index, game, player, healthbar, startX, startY, sta
   this.player.enableBody = true; 
   this.player.name = index.toString()
   game.physics.enable(this.player, Phaser.Physics.ARCADE)
-  this.player.body.immovable = false
+  this.player.body.immovable = true
   this.player.body.collideWorldBounds = true
 
   this.player.angle = angle

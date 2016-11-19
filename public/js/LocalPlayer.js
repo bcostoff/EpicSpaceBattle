@@ -21,7 +21,7 @@ var LocalPlayer = function (game) {
   game.physics.enable(this.player, Phaser.Physics.ARCADE);
   this.player.enableBody = true; 
   this.player.body.maxVelocity.setTo(400, 400)
-  this.player.body.immovable = false
+  this.player.body.immovable = true
   this.player.body.collideWorldBounds = true
 
   //var barConfig = {x: (window.innerWidth * window.devicePixelRatio)/2, y: 50};
