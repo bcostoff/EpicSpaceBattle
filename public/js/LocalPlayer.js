@@ -27,10 +27,8 @@ var LocalPlayer = function (game) {
   //var barConfig = {x: (window.innerWidth * window.devicePixelRatio)/2, y: 50};
   var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
-  //this.player.addChild(this.healthbar.bgSprite)
-  //this.player.addChild(this.healthbar.barSprite)  
-  this.healthbar.barSprite.addChild(this.player);
-  this.healthbar.barSprite.addChild(this.healthbar.bgSprite);
+  this.player.addChild(this.healthbar.bgSprite)
+  this.player.addChild(this.healthbar.barSprite)  
   // healthbar.barSprite.fixedToCamera = true;
   // healthbar.bgSprite.fixedToCamera = true;  
 }
