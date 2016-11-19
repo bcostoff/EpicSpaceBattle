@@ -25,7 +25,7 @@ var LocalPlayer = function (game) {
   this.player.body.collideWorldBounds = true
 
   //var barConfig = {x: (window.innerWidth * window.devicePixelRatio)/2, y: 50};
-  var barConfig = {x: -10, y: 0};
+  var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
   this.player.addChild(this.healthbar.bgSprite)
   this.player.addChild(this.healthbar.barSprite)  
