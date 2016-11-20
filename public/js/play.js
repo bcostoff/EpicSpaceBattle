@@ -272,7 +272,7 @@ function damageEnemy(e, l){
    console.log('Enemy Hit!')
   // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
 
-  //socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
+  socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   
   // }
 }
