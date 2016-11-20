@@ -90,14 +90,14 @@ LocalPlayer.prototype.fireLaser = function () {
         newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
       //  newLaser = game.add.sprite(this.player.body.x + 40, this.player.body.y + 40, 'laser-alt')
       }      
-      newLaser.enableBody = true; 
+      //newLaser.enableBody = true; 
       //newLaser.anchor.setTo(0.5, 0.5)
       game.physics.enable(newLaser, Phaser.Physics.ARCADE)
       //newLaser.body.collideWorldBounds = false
       newLaser.lifespan = 2000;
       newLaser.rotation = this.player.rotation;      
       newLaser.angle = this.player.angle
-      newLaser.body.immovable = true
+      //newLaser.body.immovable = true
       game.physics.arcade.velocityFromRotation(this.player.rotation, 800, newLaser.body.velocity);
       laserTime = game.time.now + 100;
       socket.emit('new laser', {x: newLaser.x, y: newLaser.y, angle: newLaser.angle})
