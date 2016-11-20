@@ -177,7 +177,7 @@ function onMovePlayer (data) {
 // Take player damage
 function onTakeDamage (data) {
   //Kill Laser
-  data.laser.kill()
+  //data.laser.sprite.kill()
 
   var damagePlayer = playerById(data.id)
 
