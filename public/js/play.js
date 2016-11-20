@@ -279,6 +279,7 @@ function damageEnemy(e, l){
     return
   }
 
+  console.log(enemy.health)
   // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) { 
   var adjustedHealth = enemy.health - 10;
   enemy.takeDamage(adjustedHealth);
