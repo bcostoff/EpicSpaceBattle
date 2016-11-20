@@ -8,7 +8,7 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   var health = startHealth
 
   this.game = game
-  this.health = startHealth
+  //this.health = startHealth
   this.alive = true
 
   if(ver == 1){
@@ -23,6 +23,7 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   this.player.anchor.setTo(0.5, 0.5)
   this.player.enableBody = true; 
   this.player.name = index.toString()
+  this.player.health = startHealth;
   game.physics.enable(this.player, Phaser.Physics.ARCADE)
   this.player.body.immovable = true
   this.player.body.collideWorldBounds = true
@@ -34,7 +35,7 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   this.player.addChild(this.healthbar.bgSprite)
   this.player.addChild(this.healthbar.barSprite)  
 
-  this.lastPosition = { x: x, y: y, angle: angle, health: health }
+  this.lastPosition = { x: x, y: y, angle: angle, health: this.player.health }
   
 }
 
