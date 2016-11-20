@@ -97,6 +97,7 @@ LocalPlayer.prototype.fireLaser = function () {
       newLaser.lifespan = 2000;
       newLaser.rotation = this.player.rotation;      
       newLaser.angle = this.player.angle
+      newLaser.body.immovable = true
       game.physics.arcade.velocityFromRotation(this.player.rotation, 800, newLaser.body.velocity);
       laserTime = game.time.now + 100;
       socket.emit('new laser', {x: newLaser.x, y: newLaser.y, angle: newLaser.angle})
