@@ -183,7 +183,8 @@ function onTakeDamage (data) {
 
   // Player not found
   if (!damagePlayer) {
-    console.log('Player not found: ', data.id)
+    //console.log('Player not found: ', data.id)
+    player.takeDamage(data.health)
     return
   }
 
