@@ -182,21 +182,20 @@ function onTakeDamage (data) {
   var damagePlayer = playerById(data.id)
 
   // Player not found
-  if (!damagePlayer) {
-    //console.log('Player not found: ', data.id)
-    player.takeDamage(data.health)
-    return
-  }
+  // if (!damagePlayer) {
+  //   console.log('Player not found: ', data.id)
+  //   return
+  // }
 
-  // Update player health
-  player.takeDamage(data.health)
+  // // Update player health
+  // damagePlayer.takeDamage(data.health)
   
-  // if(data.health == 0){
-  //   //socket.emit('disconnect')
-  //   game.state.start('dead');    
-  // }else{
-  //   player.takeDamage(data.health)
-  // }  
+  if(data.health == 0){
+    //socket.emit('disconnect')
+    game.state.start('dead');    
+  }else{
+    player.takeDamage(data.health)
+  }  
 }
 
 // New laser
@@ -272,7 +271,8 @@ function damageEnemy(e, l){
   //console.log(e.name)
    console.log('Enemy Hit!')
   // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
-  socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
+
+  //socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   
   // }
 }
