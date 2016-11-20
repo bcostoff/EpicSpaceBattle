@@ -90,7 +90,7 @@ LocalPlayer.prototype.fireLaser = function () {
         newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
       //  newLaser = game.add.sprite(this.player.body.x + 40, this.player.body.y + 40, 'laser-alt')
       }      
-      //newLaser.enableBody = true; 
+      newLaser.enableBody = true; 
       //newLaser.anchor.setTo(0.5, 0.5)
       game.physics.enable(newLaser, Phaser.Physics.ARCADE)
       //newLaser.body.collideWorldBounds = false

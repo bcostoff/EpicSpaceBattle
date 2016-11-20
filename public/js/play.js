@@ -189,7 +189,7 @@ function onTakeDamage (data) {
   }
 
   // Update player health
-  damagePlayer.takeDamage(data.health)
+  player.takeDamage(data.health)
   
   // if(data.health == 0){
   //   //socket.emit('disconnect')
