@@ -7,20 +7,6 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   var ver = startVer
   var health = startHealth
 
-  var getHealth = function () {
-    return health
-  }
-
-  var setHealth = function (newHealth) {
-    health = newHealth
-  }
-
-  // Define which variables and methods can be accessed
-  return {
-    getHealth: getHealth,
-    setHealth: setHealth
-  }
-
   this.game = game
   //this.health = startHealth
   this.alive = true
