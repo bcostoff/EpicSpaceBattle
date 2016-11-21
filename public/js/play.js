@@ -268,21 +268,16 @@ function laserById (id) {
 }
 
 function damageEnemy(e, l){
-  //console.log(e.name)
-   console.log('Enemy Hit!')
-
-  var enemy = playerById(e.name)
+  console.log('Enemy Hit!')
+  var enemyDamaged = playerById(e.name)
 
   // Player not found
-  if (!enemy) {
-    console.log('Player not found: ', e.name)
+  if (!enemyDamaged) {
+    console.log('Laser not found: ', e.name)
     return
   }
 
-  console.log(e.health)
-  // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) { 
-  var adjustedHealth = e.health - 10;
-  enemy.takeDamage(adjustedHealth);
+  enemyDamaged.takeDamage(enemyDamaged.healthbar.getPercentage())
   socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   
   // }

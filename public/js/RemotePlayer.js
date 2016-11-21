@@ -1,6 +1,6 @@
 /* global game */
 
-var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth) {
+var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth) { 
   var x = startX
   var y = startY
   var angle = startAngle
@@ -56,12 +56,8 @@ RemotePlayer.prototype.takeDamage = function (health) {
   if(health == 0){
     this.player.kill();  
   }else{
-    if(this.player.health == health){
-      newHealth = health - 10;
-      this.healthbar.setPercent(newHealth) 
-    }else{
-      this.healthbar.setPercent(health) 
-    }
+    newHealth = health - 10;
+    this.healthbar.setPercent(newHealth) 
   }  
 }
 
