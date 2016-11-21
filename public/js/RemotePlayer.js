@@ -7,41 +7,8 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   var ver = startVer
   var health = startHealth
 
-  // Getters and setters
-  var getX = function () {
-    return x
-  }
-
-  var getY = function () {
-    return y
-  }
-
-  var getAngle = function () {
-    return angle
-  }
-
-  var getVer = function () {
-    return ver
-  }
-
   var getHealth = function () {
     return health
-  }
-
-  var setX = function (newX) {
-    x = newX
-  }
-
-  var setY = function (newY) {
-    y = newY
-  }
-
-  var setAngle = function (newAngle) {
-    angle = newAngle
-  }
-
-  var setVer = function (newVer) {
-    ver = newVer
   }
 
   var setHealth = function (newHealth) {
@@ -50,17 +17,8 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
 
   // Define which variables and methods can be accessed
   return {
-    getX: getX,
-    getY: getY,
-    getAngle: getAngle,
-    getVer: getVer,
     getHealth: getHealth,
-    setX: setX,
-    setY: setY,
-    setAngle: setAngle,
-    setVer: setVer,
-    setHealth: setHealth,
-    id: id
+    setHealth: setHealth
   }
 
   this.game = game
