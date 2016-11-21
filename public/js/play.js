@@ -282,7 +282,6 @@ function damageEnemy(e, l){
   console.log(e.health)
   // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) { 
   var adjustedHealth = e.health - 10;
-  enemy.setHealth(adjustedHealth);
   enemy.takeDamage(adjustedHealth);
   socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   

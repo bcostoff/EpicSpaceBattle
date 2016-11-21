@@ -56,7 +56,12 @@ RemotePlayer.prototype.takeDamage = function (health) {
   if(health == 0){
     this.player.kill();  
   }else{
-    this.healthbar.setPercent(health) 
+    if(this.player.health == health){
+      newHealth = health - 10;
+      this.healthbar.setPercent(newHealth) 
+    }else{
+      this.healthbar.setPercent(health) 
+    }
   }  
 }
 
