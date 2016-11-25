@@ -145,6 +145,7 @@ function onSocketDisconnect () {
 // New player
 function onNewPlayer (data) {
   console.log('New player connected: ', data.id)
+  console.log('Total Players: ', data.num_of_players)
   //console.log('New player uses: ', data.ver)
 
   // Avoid possible duplicate players
@@ -231,6 +232,7 @@ function onMoveLaser (data) {
 // Remove player
 function onRemovePlayer (data) {
   var removePlayer = playerById(data.id)
+  console.log('Total Players: ', data.num_of_players)
 
   // Player not found
   if (!removePlayer) {
