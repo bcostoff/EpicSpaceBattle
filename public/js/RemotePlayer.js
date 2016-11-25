@@ -42,7 +42,7 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
 RemotePlayer.prototype.update = function () {
   if (this.player.x !== this.lastPosition.x || this.player.y !== this.lastPosition.y || this.player.angle != this.lastPosition.angle) {
     //this.player.play('move')
-    game.add.tween(this.player).to( { x: this.player.x, y: this.player.y }, this.game.time.physicsElapsed, Phaser.Easing.Default, true);
+    //game.add.tween(this.player).to( { x: this.player.x, y: this.player.y }, this.game.time.physicsElapsed, Phaser.Easing.Default, true);
     this.player.rotation = Math.PI + game.physics.arcade.angleToXY(this.player, this.lastPosition.x, this.lastPosition.y)
   } else {
     //this.player.play('stop')
