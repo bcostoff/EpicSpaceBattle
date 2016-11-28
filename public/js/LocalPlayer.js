@@ -74,7 +74,7 @@ LocalPlayer.prototype.update = function () {
 
         //NEW CODE TO EMIT
         this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
-        sendToServer(this.newServerUpdate)
+        this.player.sendToServer(this.newServerUpdate)
 
         //OLD CODE TO EMIT
         //socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
@@ -113,16 +113,6 @@ LocalPlayer.prototype.fireLaser = function () {
 
 LocalPlayer.prototype.sendToServer = function (serverUpdate) {
   setTimeout(function(){ socket.emit('move player', serverUpdate); }, 100);  
-}
-
-
-LocalPlayer.prototype.sendToServer = function (health) {
-  if(health == 0){
-    socket.emit('disconnect')
-    game.state.start('dead');    
-  }else{
-    this.healthbar.setPercent(health) 
-  }  
 }
 
 
