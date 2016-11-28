@@ -74,7 +74,7 @@ LocalPlayer.prototype.update = function () {
 
         //NEW CODE TO EMIT
         this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
-        this.player.sendToServer(this.newServerUpdate)
+        this.sendToServer(this.newServerUpdate);
 
         //OLD CODE TO EMIT
         //socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
