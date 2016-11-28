@@ -24,13 +24,13 @@ var LocalPlayer = function (game) {
   this.player.body.immovable = true
   this.player.body.collideWorldBounds = true
 
-  //var barConfig = {x: (window.innerWidth * window.devicePixelRatio)/2, y: 50};
   var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
   this.player.addChild(this.healthbar.bgSprite)
   this.player.addChild(this.healthbar.barSprite)  
-  // healthbar.barSprite.fixedToCamera = true;
-  // healthbar.bgSprite.fixedToCamera = true;  
+
+  //NEW CODE TO EMIT
+  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
 }
 
 
@@ -72,7 +72,12 @@ LocalPlayer.prototype.update = function () {
             this.player.animations.play('stop')
         }
 
-        socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
+        //NEW CODE TO EMIT
+        this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
+        sendToServer(this.newServerUpdate)
+
+        //OLD CODE TO EMIT
+        //socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
 
 }
 
@@ -102,6 +107,21 @@ LocalPlayer.prototype.fireLaser = function () {
       laserTime = game.time.now + 100;
       socket.emit('new laser', {x: newLaser.x, y: newLaser.y, angle: newLaser.angle})
     }
+  }  
+}
+
+
+LocalPlayer.prototype.sendToServer = function (serverUpdate) {
+  setTimeout(function(){ socket.emit('move player', serverUpdate); }, 100);  
+}
+
+
+LocalPlayer.prototype.sendToServer = function (health) {
+  if(health == 0){
+    socket.emit('disconnect')
+    game.state.start('dead');    
+  }else{
+    this.healthbar.setPercent(health) 
   }  
 }
 
