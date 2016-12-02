@@ -1,20 +1,21 @@
 /* global game */
 
-var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth) { 
+var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth, startTeam) { 
   var x = startX
   var y = startY
   var angle = startAngle
   var ver = startVer
   var health = startHealth
+  var team = startTeam
 
   this.game = game
   //this.health = startHealth
   this.alive = true
 
   if(ver == 1){
-    this.player = game.add.sprite(x, y, 'dude')
+    this.player = game.add.sprite(x, y, 'dude-' + team)
   }else if(ver == 2){
-    this.player = game.add.sprite(x, y, 'dude-alt')
+    this.player = game.add.sprite(x, y, 'dude-alt-' + team)
   }
   this.player.scale.setTo(0.5, 0.5);
   this.player.animations.add('move', [0], 0, true)

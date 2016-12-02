@@ -5,10 +5,10 @@ var registerShipState = {
 		var titleLabel = game.add.text(0,0,'Choose Your Ship',{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
 		titleLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio) - 250);
 
-		ver1 = game.add.sprite((window.innerWidth * window.devicePixelRatio)/4, (window.innerHeight * window.devicePixelRatio)/4, 'dude')
+		ver1 = game.add.sprite((window.innerWidth * window.devicePixelRatio)/4, (window.innerHeight * window.devicePixelRatio)/4, 'dude-' + team)
 		ver1.scale.setTo(0.5, 0.5);
 		ver1.name = 1;
-        ver2 = game.add.sprite(((window.innerWidth * window.devicePixelRatio)/2) + 60, (window.innerHeight * window.devicePixelRatio)/4, 'dude-alt')
+        ver2 = game.add.sprite(((window.innerWidth * window.devicePixelRatio)/2) + 60, (window.innerHeight * window.devicePixelRatio)/4, 'dude-alt-' + team)
         ver2.scale.setTo(0.5, 0.5);
         ver2.name = 2;
 

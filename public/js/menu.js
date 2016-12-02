@@ -11,7 +11,7 @@ var menuState = {
 
 	update: function(){
 		if(game.input.activePointer.justPressed()) {
-	      game.state.start('registerShip');
+	      game.state.start('lobby');
 	    }
 	}
 

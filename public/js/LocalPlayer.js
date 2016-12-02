@@ -6,9 +6,9 @@ var LocalPlayer = function (game) {
   var startY = Math.round(Math.random() * (1000) - 500)
 
   if(ship_ver == 1){
-    this.player = game.add.sprite(startX, startY, 'dude')            
+    this.player = game.add.sprite(startX, startY, 'dude-' + team)            
   }else if(ship_ver == 2){
-    this.player = game.add.sprite(startX, startY, 'dude-alt')
+    this.player = game.add.sprite(startX, startY, 'dude-alt-' + team)
   }
 
   this.player.scale.setTo(0.5, 0.5);

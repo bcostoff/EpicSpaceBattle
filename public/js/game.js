@@ -29,10 +29,18 @@ var newLaser
 var newLasers
 var rock
 var healthbar
+var playerCount = 0;
+var titleLabel;
+var team;
+var teamLabel;
+var timer
+var timerEvent
+var text;
 
 game.state.add('boot',bootState);
 game.state.add('load',loadState);
-game.state.add('menu',menuState);
+game.state.add('menu',menuState); 
+game.state.add('lobby',lobbyState);
 game.state.add('registerShip',registerShipState);
 game.state.add('play',playState);
 game.state.add('dead',deadState);

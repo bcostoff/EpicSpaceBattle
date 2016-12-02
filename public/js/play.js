@@ -2,7 +2,7 @@ var playState = {
 
 	create: function(){
 
-		  socket = io.connect()
+		  //socket = io.connect()
 
       // Resize our game world to be a 2000 x 2000 square
       game.world.setBounds(0, 0, 6144, 6144)
@@ -44,7 +44,8 @@ var playState = {
       game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
       // Start listening for events
-      setEventHandlers()
+      //setEventHandlers()
+      onLobbyJoined();
 
 	},
 
@@ -100,6 +101,9 @@ var setEventHandlers = function () {
   // New player message received
   socket.on('new player', onNewPlayer)
 
+  // New player message received
+  socket.on('lobby joined', onLobbyJoined)
+
   // Player move message received
   socket.on('move player', onMovePlayer)
 
@@ -114,11 +118,41 @@ var setEventHandlers = function () {
 
   // Take Damage message received
   socket.on('take damage', onTakeDamage)
+
+  socket.on('player count', function(data) {
+      playerCount = data.num_of_players;
+  });
+
+  socket.on('player team', function(data) {
+      team = data.team;
+  });
+
 }
+
 
 // Socket connected
 function onSocketConnected () {
-  console.log('Connected to socket server')
+  console.log('Connected to socket server')  
+  // // Reset enemies on reconnect
+  // enemies.forEach(function (enemy) {
+  //   enemy.player.kill()
+  // })
+  // enemies = []
+
+  // // Reset lasers on reconnect
+  // lasers.forEach(function (laser) {
+  //   laser.laser.kill()
+  // })
+  // lasers = []
+
+  // // Send local player data to the game server
+  // //console.log('Player picked ship: ' + ship_ver)
+  //socket.emit('new player', { team: team })
+}
+
+
+function onLobbyJoined () {
+  console.log('Lobby Joined')
 
   // Reset enemies on reconnect
   enemies.forEach(function (enemy) {
@@ -134,13 +168,15 @@ function onSocketConnected () {
 
   // Send local player data to the game server
   //console.log('Player picked ship: ' + ship_ver)
-  socket.emit('new player', { x: player.x, y: player.y, angle: player.angle, ver: ship_ver, health: 100 })
+  socket.emit('new player', { x: player.x, y: player.y, angle: player.angle, ver: ship_ver, health: 100, team: team })
 }
+
 
 // Socket disconnected
 function onSocketDisconnect () {
   console.log('Disconnected from socket server')
 }
+
 
 // New player
 function onNewPlayer (data) {
@@ -155,8 +191,10 @@ function onNewPlayer (data) {
     return
   }
   // Add new player to the remote players array
-  enemies.push(new RemotePlayer(data.id, game, data.x, data.y, data.angle, data.ver, data.health))
+  enemies.push(new RemotePlayer(data.id, game, data.x, data.y, data.angle, data.ver, data.health, data.team))
 }
+
+
 
 // Move player
 function onMovePlayer (data) {
@@ -294,6 +332,7 @@ function crashPlayers(player, enemy){
     //laser.kill();   
     // }
 }
+
 // function changeHealth(player, rock){
 //   if(game.time.now > healthTime){
 //     oldHealth = healthbar.getPercentage();
@@ -303,3 +342,7 @@ function crashPlayers(player, enemy){
 //   }
 // }
   
+
+function isEven(n) {
+   return n % 2 == 0;
+}
