@@ -2,8 +2,11 @@
 
 var LocalPlayer = function (game) {
   // The base of our player
-  var startX = Math.round(Math.random() * (1000) - 500)
-  var startY = Math.round(Math.random() * (1000) - 500)
+  //var startX = Math.round(Math.random() * (1000) - 500)
+  //var startY = Math.round(Math.random() * (1000) - 500)
+
+  var startX = 550;
+  var startY = 550;
 
   if(ship_ver == 1){
     this.player = game.add.sprite(startX, startY, 'dude-' + team)            

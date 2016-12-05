@@ -4,12 +4,12 @@ var playState = {
 
 		  //socket = io.connect()
 
-      // Resize our game world to be a 2000 x 2000 square
-      game.world.setBounds(0, 0, 6144, 6144)
-
       // Our tiled scrolling background
-      space = game.add.tileSprite(0, 0, 6144, 6144, 'space')
-      space.fixedToCamera = true
+      space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+      //space.fixedToCamera = true;
+
+      // Resize our game world to be a 2000 x 2000 square
+      game.world.setBounds(0, 0, 6144, 6144);
 
       player = new LocalPlayer(game);
 
@@ -36,11 +36,13 @@ var playState = {
       newLasers.setAll('checkWorldBounds', true);
       newLasers.setAll('outOfBoundsKill', true);   
 
-      game.camera.follow(player.sprite)
-      game.camera.deadzone = new Phaser.Rectangle(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio)
+      console.log(player);
+      game.camera.follow(player.player);
+      //game.camera.deadzone = new Phaser.Rectangle(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio)
       //game.camera.focusOnXY(player.x, player.y)
+      //game.camera.deadzone = new Phaser.Rectangle(500, 500, 500, 500);
 
-      cursors = game.input.keyboard.createCursorKeys()
+      cursors = game.input.keyboard.createCursorKeys();
       game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
       // Start listening for events
