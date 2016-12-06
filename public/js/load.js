@@ -13,6 +13,7 @@ var loadState = {
                 game.load.spritesheet('dude-alt-blue', 'assets/B2.png', 160, 160)
                 game.load.image('laser', 'assets/laser.png');
                 game.load.image('laser-alt', 'assets/laser2.png');
+                game.load.image('mini_map', 'assets/mini_map.png');
                 //game.load.image('rock', 'assets/rock.png');
                 //game.load.image("background", "images/jungle-bg-2.png");
 
