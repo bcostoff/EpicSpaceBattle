@@ -1,12 +1,13 @@
 /* global game */
 
-var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth, startTeam) { 
+var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, startHealth, startTeam, startUsername) { 
   var x = startX
   var y = startY
   var angle = startAngle
   var ver = startVer
   var health = startHealth
   var team = startTeam
+  var username = startUsername
 
   this.game = game
   //this.health = startHealth

@@ -33,7 +33,7 @@ var LocalPlayer = function (game) {
   this.player.addChild(this.healthbar.barSprite)  
 
   //NEW CODE TO EMIT
-  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
+  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
 }
 
 
@@ -76,7 +76,7 @@ LocalPlayer.prototype.update = function () {
         }
 
         //NEW CODE TO EMIT
-        this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() }
+        this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
         this.sendToServer(this.newServerUpdate);
 
         //OLD CODE TO EMIT
