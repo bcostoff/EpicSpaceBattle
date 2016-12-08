@@ -48,13 +48,16 @@ var playState = {
       // Start listening for events
       //setEventHandlers()
       onLobbyJoined();
-      createMiniMap();
+
+      minimap = new MiniMap(game);
+      //createMiniMap();
+
 
 	},
 
 	update: function(){
 
-    updateUnitDots(player,enemies);
+    //updateUnitDots(player,enemies);
 
 		//-----------TEST ITEM---------//
     //game.physics.arcade.collide(player, rock, changeHealth, null, this);                
@@ -62,11 +65,12 @@ var playState = {
       if (enemies[i].alive) {
         enemies[i].update()                
         game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
-        game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this);        
-        //game.physics.arcade.collide(newLaser, enemies[i].player, damageEnemy, null, this);                
+        game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this);                  
       }
     }
         
+    minimap.update(player,enemies)
+
     player.update();
 
     space.tilePosition.x = -game.camera.x
@@ -327,26 +331,6 @@ function damageEnemy(e, l){
   l.kill();   
   // }
 }
-
-
-function crashPlayers(player, enemy){
-  //console.log(enemy.name)
-    // console.log('Enemy Hit!')
-    // if(Math.abs(laser.body.velocity.x) > 0 && Math.abs(laser.body.velocity.y) > 0) {  
-    //socket.emit('take damage', { damageType: 'laser', enemy: enemy.name, laser: laser.name })
-    //laser.kill();   
-    // }
-}
-
-// function changeHealth(player, rock){
-//   if(game.time.now > healthTime){
-//     oldHealth = healthbar.getPercentage();
-//     newHealth = oldHealth - 10;
-//     healthbar.setPercent(newHealth)
-//     healthTime = game.time.now + 500;
-//   }
-// }
-  
 
 function isEven(n) {
    return n % 2 == 0;

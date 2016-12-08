@@ -1,6 +1,10 @@
 var lobbyState = {
 
 	create: function(){
+
+		// Our tiled scrolling background
+	    space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+
 		socket = io.connect();
 		pCount = 0;
 		titleLabel = game.add.text(0,0,'Number of Players Connected: ' + pCount,{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
