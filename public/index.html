@@ -12,11 +12,17 @@
     <link type='text/css' rel='stylesheet' href='style/game.css' />
     <script src='js/vendor/phaser.min.js'></script>
     <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
-  <body>
+  <body style="background-image: url('assets/tileable-space.jpg');background-repeat: repeat;">
+
+    <div class="container">
     <script src='js/RemotePlayer.js'></script>
     <script src='js/RemoteLaser.js'></script>
     <script src="js/RemoteHealthBar.js"></script>
+    <script src="js/LocalMiniMap.js"></script>
     <script src="js/LocalPlayer.js"></script>
     <script src="js/boot.js"></script>
     <script src="js/load.js"></script>
@@ -26,5 +32,36 @@
     <script src="js/dead.js"></script>
     <script src="js/play.js"></script>
     <script src='js/game.js'></script>
+
+    <div class="col-md-12" id="title-screen">
+        <div class="col-md-12 text-center"><h1 style="font-family: 'Bangers', cursive;color:#ffffff">Epic Space Battle</h1></div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center" style="background-color:rgba(255,255,255,0.1)!important;padding:25px;">        
+            <h3 style="font-family: 'Bangers', cursive;color:#ffffff;font-weight:normal;">Gamer Tag</h3>
+            <form class="form-horizontal" id="username-form">
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="gamer_tag" placeholder="Gamer Tag">
+                </div>
+              </div>      
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 text-center">
+                  <button type="button" id="join_action" class="btn btn-primary" onclick="joinAction()" style="font-family: 'Bangers', cursive;font-weight:normal;">Join The Action!</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="clearfix">&nbsp;</div>        
+    </div>
+    
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
   </body>
 </html>
