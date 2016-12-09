@@ -13,7 +13,7 @@ var lobbyState = {
 		teamLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio));
 		timer = game.time.create();        
         // Create a delayed event 1m and 30s from now
-        timerEvent = timer.add(Phaser.Timer.SECOND * 6, this.endTimer, this);       
+        timerEvent = timer.add(Phaser.Timer.SECOND * 1, this.endTimer, this);       
 		setEventHandlers();		
 	},
 
