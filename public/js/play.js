@@ -5,7 +5,7 @@ var playState = {
 		  //socket = io.connect()
 
       // Our tiled scrolling background
-      //space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+      space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
       //space.fixedToCamera = true;
 
       // Resize our game world to be a 2000 x 2000 square
@@ -83,8 +83,8 @@ var playState = {
 
     player.update();
 
-    //space.tilePosition.x = -game.camera.x
-    //space.tilePosition.y = -game.camera.y
+    space.tilePosition.x = -game.camera.x
+    space.tilePosition.y = -game.camera.y
 
     //if (game.input.activePointer.isDown) {
     //  if (game.physics.arcade.distanceToPointer(player) >= 10) {
