@@ -45,10 +45,10 @@ var playState = {
       if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
         pad = game.plugins.add(Phaser.VirtualJoystick);
         stick1 = pad.addStick(0, 0, 100, 'arcade');
-        stick1.scale = 0.6;
+        stick1.scale = 1;
         stick1.alignBottomLeft(48);
         stick2 = pad.addStick(0, 0, 100, 'arcade');
-        stick2.scale = 0.6;
+        stick2.scale = 1;
         stick2.alignBottomRight(48);
       }else{
         cursors = game.input.keyboard.createCursorKeys();
