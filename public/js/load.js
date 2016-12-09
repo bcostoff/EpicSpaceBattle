@@ -6,6 +6,7 @@ var loadState = {
 
 		//game.load.image('space', 'assets/space-bg.jpg')
                 //game.load.spritesheet('dude', 'assets/ship3.png', 83, 74)
+                game.load.atlas('arcade', 'assets/arcade-joystick.png', 'assets/arcade-joystick.json');
                 game.load.image('space', 'assets/tileable-space.jpg')
                 game.load.spritesheet('dude-green', 'assets/G1.png', 160, 160)
                 game.load.spritesheet('dude-alt-green', 'assets/G2.png', 160, 160)
