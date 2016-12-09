@@ -34,6 +34,9 @@ var username;
 var pad;
 var stick1;
 var stick2;
+var scaleRatio = window.devicePixelRatio / 3;
+
+alert(scaleRatio);
 
 // var device = new Phaser.Device();
 // var deviceSet = false;	
