@@ -40,9 +40,9 @@ if(dpr == 1){
 }
 var scaleRatio = dpr / 3;
 
-if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
-	screen.orientation.lock('landscape');
-}
+// if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
+// 	screen.orientation.lock('landscape');
+// }
 
 
 game.state.add('boot',bootState);
