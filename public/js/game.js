@@ -34,21 +34,15 @@ var username;
 var pad;
 var stick1;
 var stick2;
-var scaleRatio = window.devicePixelRatio / 3;
+var dpr = window.devicePixelRatio;
+if(dpr == 1){
+	dpr = 1.5;
+}
+var scaleRatio = dpr / 3;
 
-alert(scaleRatio);
-
-// var device = new Phaser.Device();
-// var deviceSet = false;	
-
-// alert(device);
-
-
-
-
-// if(window.innerWidth < 737){
-// screen.orientation.lock('landscape');
-// }
+if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
+	screen.orientation.lock('landscape');
+}
 
 
 game.state.add('boot',bootState);

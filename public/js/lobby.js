@@ -8,9 +8,9 @@ var lobbyState = {
 		socket = io.connect();
 		pCount = 0;
 		titleLabel = game.add.text(0,0,'Number of Players Connected: ' + pCount,{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
-		titleLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio) - 100);
+		titleLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio) -100);
 		teamLabel = game.add.text(0,0,'Team: ' + team,{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
-		teamLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio));
+		teamLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
 		timer = game.time.create();        
         // Create a delayed event 1m and 30s from now
         timerEvent = timer.add(Phaser.Timer.SECOND * 1, this.endTimer, this);       

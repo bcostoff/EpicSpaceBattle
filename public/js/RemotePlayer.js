@@ -18,7 +18,8 @@ var RemotePlayer = function (index, game, startX, startY, startAngle, startVer, 
   }else if(ver == 2){
     this.player = game.add.sprite(x, y, 'dude-alt-' + team)
   }
-  this.player.scale.setTo(0.5, 0.5);
+  // this.player.scale.setTo(0.5, 0.5);
+  this.player.scale.setTo(scaleRatio, scaleRatio);
   this.player.animations.add('move', [0], 0, true)
   this.player.animations.add('stop', [0], 0, true)
 

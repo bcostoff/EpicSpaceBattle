@@ -14,7 +14,8 @@ var LocalPlayer = function (game) {
     this.player = game.add.sprite(startX, startY, 'dude-alt-' + team)
   }
 
-  this.player.scale.setTo(0.5, 0.5);
+  // this.player.scale.setTo(0.5, 0.5);
+  this.player.scale.setTo(scaleRatio, scaleRatio);
   this.player.anchor.setTo(0.5, 0.5)
   this.player.animations.add('move', [0], 0, true)
   this.player.animations.add('stop', [0], 0, true)
