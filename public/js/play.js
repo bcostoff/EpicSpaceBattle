@@ -44,7 +44,7 @@ var playState = {
 
       if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
         pad = game.plugins.add(Phaser.VirtualJoystick);
-        stick1 = this.pad.addStick(0, 0, 100, 'arcade');
+        stick1 = pad.addStick(0, 0, 100, 'arcade');
         stick1.scale = 0.6;
         stick1.alignBottomLeft(48);
         stick2 = pad.addStick(0, 0, 100, 'arcade');

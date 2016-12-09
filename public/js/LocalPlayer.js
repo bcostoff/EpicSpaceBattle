@@ -47,7 +47,7 @@ LocalPlayer.prototype.update = function () {
       game.physics.arcade.velocityFromRotation(stick1.rotation, stick1.force * currentSpeed, this.player.body.velocity);
       player.sprite.rotation = stick1.rotation;
     }else{
-      this.sprite.body.velocity.set(0);
+      this.player.body.velocity.set(0);
     }
 
   }else{
@@ -77,7 +77,7 @@ LocalPlayer.prototype.update = function () {
       }
     }
 
-    game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity)
+   game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity)
 
   }
   
