@@ -31,6 +31,24 @@ var timer
 var timerEvent
 var text;
 var username;
+var pad;
+var stick1;
+var stick2;
+
+// var device = new Phaser.Device();
+// var deviceSet = false;	
+
+// alert(device);
+
+if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+	alert('hello');
+}
+
+
+// if(window.innerWidth < 737){
+screen.orientation.lock('landscape');
+// }
+
 
 game.state.add('boot',bootState);
 game.state.add('load',loadState);
