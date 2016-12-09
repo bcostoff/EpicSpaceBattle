@@ -38,49 +38,62 @@ var LocalPlayer = function (game) {
 
 
 LocalPlayer.prototype.update = function () {
-        
 
-        if(cursors.left.isDown){
-            this.player.angle -= 4
-        }else if(cursors.right.isDown) {
-            this.player.angle += 4
-        }
+  if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
 
+    currentSpeed = 400
 
-        if (cursors.up.isDown){
-            // The speed we'll travel at
-            currentSpeed = 400
-        }else{
-            if (currentSpeed > 0) {
-                currentSpeed -= 4
-            }
-        }
+    if (stick1.isDown){
+      game.physics.arcade.velocityFromRotation(stick1.rotation, stick1.force * currentSpeed, this.player.body.velocity);
+      player.sprite.rotation = stick1.rotation;
+    }else{
+      this.sprite.body.velocity.set(0);
+    }
 
+  }else{
 
-        if (cursors.down.isDown){
-            // The speed we'll travel at
-            currentSpeed = -200
-        }else{
-            if (currentSpeed > 0) {
-                currentSpeed -= 4
-            }
-        }
+    if(cursors.left.isDown){
+      this.player.angle -= 4
+    }else if(cursors.right.isDown) {
+      this.player.angle += 4
+    }
 
 
-        game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity)
+    if (cursors.up.isDown){
+      // The speed we'll travel at
+      currentSpeed = 400
+    }else{
+      if (currentSpeed > 0) {
+          currentSpeed -= 4
+      }
+    }
 
-        if(currentSpeed > 0){
-            this.player.animations.play('move')
-        }else{
-            this.player.animations.play('stop')
-        }
+    if (cursors.down.isDown){
+      // The speed we'll travel at
+      currentSpeed = -200
+    }else{
+      if (currentSpeed > 0) {
+        currentSpeed -= 4
+      }
+    }
 
-        //NEW CODE TO EMIT
-        this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
-        this.sendToServer(this.newServerUpdate);
+    game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity)
 
-        //OLD CODE TO EMIT
-        //socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
+  }
+  
+
+  if(currentSpeed > 0){
+    this.player.animations.play('move')
+  }else{
+    this.player.animations.play('stop')
+  }
+
+  //NEW CODE TO EMIT
+  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
+  this.sendToServer(this.newServerUpdate);
+
+  //OLD CODE TO EMIT
+  //socket.emit('move player', { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage() })
 
 }
 

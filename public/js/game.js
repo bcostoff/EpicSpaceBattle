@@ -40,13 +40,11 @@ var stick2;
 
 // alert(device);
 
-if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
-	alert('hello');
-}
+
 
 
 // if(window.innerWidth < 737){
-screen.orientation.lock('landscape');
+// screen.orientation.lock('landscape');
 // }
 
 

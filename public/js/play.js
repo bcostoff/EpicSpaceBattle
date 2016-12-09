@@ -36,14 +36,24 @@ var playState = {
       newLasers.setAll('checkWorldBounds', true);
       newLasers.setAll('outOfBoundsKill', true);   
 
-      console.log(player);
+      //console.log(player);
       game.camera.follow(player.player);
       //game.camera.deadzone = new Phaser.Rectangle(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio)
       //game.camera.focusOnXY(player.x, player.y)
       //game.camera.deadzone = new Phaser.Rectangle(500, 500, 500, 500);
 
-      cursors = game.input.keyboard.createCursorKeys();
-      game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+      if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+        pad = game.plugins.add(Phaser.VirtualJoystick);
+        stick1 = this.pad.addStick(0, 0, 100, 'arcade');
+        stick1.scale = 0.6;
+        stick1.alignBottomLeft(48);
+        stick2 = pad.addStick(0, 0, 100, 'arcade');
+        stick2.scale = 0.6;
+        stick2.alignBottomRight(48);
+      }else{
+        cursors = game.input.keyboard.createCursorKeys();
+        game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+      }
 
       // Start listening for events
       //setEventHandlers()
@@ -84,11 +94,16 @@ var playState = {
     //  }
     //}
 
-    //Fire Laser
-    if(game.input.activePointer.isDown){
-      player.fireLaser(enemies);
+    if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+      if(stick2.isDown){
+        player.fireLaser(enemies);
+      }
+    }else{
+      //Fire Laser
+      if(game.input.activePointer.isDown){
+        player.fireLaser(enemies);
+      }
     }
-
 
 	},
 
