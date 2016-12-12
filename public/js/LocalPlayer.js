@@ -134,7 +134,7 @@ LocalPlayer.prototype.sendToServer = function (serverUpdate) {
 
 
 LocalPlayer.prototype.takeDamage = function (health,emitter) {
-  if(health == 0){
+  if(health < 1){
     this.explode(emitter);
     //socket.emit('disconnect')
     game.state.start('dead');    
@@ -145,7 +145,7 @@ LocalPlayer.prototype.takeDamage = function (health,emitter) {
 
 
 LocalPlayer.prototype.explode = function(emitter) {
-    emitter.emit('basic', pointer.x, pointer.y, { total: 32 });
+    emitter.emit('ship_explosion', pointer.x, pointer.y, { total: 32 });
 }
 
 

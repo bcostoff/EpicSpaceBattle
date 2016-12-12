@@ -59,7 +59,7 @@ RemotePlayer.prototype.update = function () {
 }
 
 RemotePlayer.prototype.takeDamage = function (health,emitter) {
-  if(health == 0){
+  if(health < 1){
     this.explode(emitter);
     this.player.kill();  
   }else{
@@ -69,7 +69,7 @@ RemotePlayer.prototype.takeDamage = function (health,emitter) {
 }
 
 RemotePlayer.prototype.explode = function(emitter) {
-    emitter.emit('basic', this.player.x, this.player.y, { total: 32 });
+    emitter.emit('ship_explosion', this.player.x, this.player.y, { total: 32 });
 }
 
 

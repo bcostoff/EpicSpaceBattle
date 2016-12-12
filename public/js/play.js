@@ -70,7 +70,7 @@ var playState = {
         rotation: { delta: 3 },
         velocity: { radial: { arcStart: -90, arcEnd: 90 }, initial: { min: 3, max: 6 }, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.5 }, { x: 1, y: 0 } ]  }
       };
-      manager.addData('basic', data);
+      manager.addData('ship_explosion', data);
       emitter = manager.createEmitter();
       //emitter.force.y = 0.1;
       emitter.addToWorld();
