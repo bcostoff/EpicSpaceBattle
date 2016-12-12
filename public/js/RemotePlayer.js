@@ -58,13 +58,18 @@ RemotePlayer.prototype.update = function () {
   this.lastPosition.angle = this.player.angle
 }
 
-RemotePlayer.prototype.takeDamage = function (health) {
+RemotePlayer.prototype.takeDamage = function (health,emitter) {
   if(health == 0){
+    this.explode(emitter);
     this.player.kill();  
   }else{
     newHealth = health - 10;
     this.healthbar.setPercent(newHealth) 
   }  
+}
+
+RemotePlayer.prototype.explode = function(emitter) {
+    emitter.emit('basic', this.player.x, this.player.y, { total: 32 });
 }
 
 

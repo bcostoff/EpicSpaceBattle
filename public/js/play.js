@@ -62,6 +62,18 @@ var playState = {
       minimap = new MiniMap(game);
       //createMiniMap();
 
+      manager = this.game.plugins.add(Phaser.ParticleStorm);
+      var data = {
+        lifespan: { min: 500, max: 2000 },
+        image: ['flare_diamond', 'flare_point', 'flare_vertical'],
+        scale: { min: 0.2, max: 0.4 },
+        rotation: { delta: 3 },
+        velocity: { radial: { arcStart: -90, arcEnd: 90 }, initial: { min: 3, max: 6 }, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.5 }, { x: 1, y: 0 } ]  }
+      };
+      manager.addData('basic', data);
+      emitter = manager.createEmitter();
+      //emitter.force.y = 0.1;
+      emitter.addToWorld();
 
 	},
 
@@ -74,7 +86,7 @@ var playState = {
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
         enemies[i].update()                
-        game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
+        //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
         game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this);                  
       }
     }
@@ -257,7 +269,7 @@ function onTakeDamage (data) {
     //socket.emit('disconnect')
     game.state.start('dead');    
   }else{
-    player.takeDamage(data.health)
+    player.takeDamage(data.health,emitter)
   }  
 }
 
@@ -341,7 +353,7 @@ function damageEnemy(e, l){
     return
   }
 
-  enemyDamaged.takeDamage(enemyDamaged.healthbar.getPercentage())
+  enemyDamaged.takeDamage(enemyDamaged.healthbar.getPercentage(),emitter)
   socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   
   // }

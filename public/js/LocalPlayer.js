@@ -133,8 +133,9 @@ LocalPlayer.prototype.sendToServer = function (serverUpdate) {
 }
 
 
-LocalPlayer.prototype.takeDamage = function (health) {
+LocalPlayer.prototype.takeDamage = function (health,emitter) {
   if(health == 0){
+    this.explode(emitter);
     socket.emit('disconnect')
     game.state.start('dead');    
   }else{
@@ -142,6 +143,10 @@ LocalPlayer.prototype.takeDamage = function (health) {
   }  
 }
 
+
+LocalPlayer.prototype.explode = function(emitter) {
+    emitter.emit('basic', pointer.x, pointer.y, { total: 32 });
+}
 
 
 window.LocalPlayer = LocalPlayer

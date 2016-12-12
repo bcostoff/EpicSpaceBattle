@@ -2,12 +2,14 @@
 
 //var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render })
 //var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render })
-if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
-	//var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, '')
-	var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '')
-}else{
-	var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '')
-}
+// if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
+// 	//var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, '')
+// 	var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '')
+// }else{
+// 	var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '')
+// }
+var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '')
+
 
 var socket // Socket connection
 var space
@@ -43,6 +45,8 @@ if(dpr == 1){
 	dpr = 1.5;
 }
 var scaleRatio = dpr / 3;
+var manager = null;
+var emitter = null;
 
 // if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
 // 	screen.orientation.lock('landscape');
