@@ -136,7 +136,7 @@ LocalPlayer.prototype.sendToServer = function (serverUpdate) {
 LocalPlayer.prototype.takeDamage = function (health,emitter) {
   if(health == 0){
     this.explode(emitter);
-    socket.emit('disconnect')
+    //socket.emit('disconnect')
     game.state.start('dead');    
   }else{
     this.healthbar.setPercent(health) 
