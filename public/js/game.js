@@ -69,3 +69,5 @@ function joinAction(){
 	$('#title-screen').hide();
 	game.state.start('lobby');
 }
+
+window.onorientationchange = function() { window.location.reload(); };
