@@ -19,10 +19,6 @@ canvas {
 }
 
 #warning-message{
-	position: absolute;
-  	top:0px;
-  	left:0px;
   	z-index: 20;
-  	margin: 15px;
   	padding: 10px;
 }
