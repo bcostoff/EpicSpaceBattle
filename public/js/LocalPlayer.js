@@ -49,9 +49,10 @@ LocalPlayer.prototype.update = function () {
     if (stick1.isDown){
       game.physics.arcade.velocityFromRotation(stick1.rotation, stick1.force * currentSpeed, this.player.body.velocity);
       this.player.rotation = stick1.rotation;
-    }else{
-      this.player.body.velocity.set(0);
     }
+    // }else{
+    //   this.player.body.velocity.set(0);
+    // }
 
   }else{
 
