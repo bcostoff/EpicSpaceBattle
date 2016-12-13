@@ -18,19 +18,23 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style type="text/css">
-    #warning-message { display: none; }
+    /* #warning-message { display: none; }
     @media only screen and (orientation:portrait){
         #main-wrapper { display:none; }
         #warning-message { display:block; }
     }
     @media only screen and (orientation:landscape){
         #warning-message { display:none; }
-    }
+    } */
     </style>
     </head>
     <body>
 
-    <script src='js/RemotePlayer.js'></script>
+    
+
+    <!-- <div id="main-wrapper"> -->
+        <div class="container">
+        <script src='js/RemotePlayer.js'></script>
     <script src='js/RemoteLaser.js'></script>
     <script src="js/RemoteHealthBar.js"></script>
     <script src="js/LocalMiniMap.js"></script>
@@ -43,9 +47,6 @@
     <script src="js/dead.js"></script>
     <script src="js/play.js"></script>
     <script src='js/game.js'></script>
-
-    <div id="main-wrapper">
-        <div class="container">
             <div class="col-xs-3 col-sm-3 col-md-3"></div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="title-screen">
                 <div class="col-md-12 text-center"><h1 style="font-family: 'Bangers', cursive;color:#ffffff">Epic Space Battle</h1></div>
@@ -71,11 +72,11 @@
             </div>  
             <div class="col-xs-3 col-sm-3 col-md-3"></div>      
         </div>
-    </div>
+    <!-- </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bg-danger text-danger" id="warning-message">
         This website is only viewable in <br>landscape mode
-    </div>
+    </div> -->
 
     <script src="js/jquery.min.js"></script>
 
