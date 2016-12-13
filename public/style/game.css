@@ -17,3 +17,10 @@ canvas {
   	left:0px;
   	z-index: 20;
 }
+
+#warning-message{
+	position: absolute;
+  	top:0px;
+  	left:0px;
+  	z-index: 20;
+}
