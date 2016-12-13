@@ -1,8 +1,19 @@
 body {
-  margin: 0;
-  overflow: hidden;
+  	margin: 0;
+  	overflow: hidden;
 }
 
 canvas {
-  display: block;
+  	display: block;
+  	position: absolute;
+  	top:0px;
+  	left:0px;
+  	z-index: 10;
+}
+
+#title-screen{
+	position: absolute;
+  	top:0px;
+  	left:0px;
+  	z-index: 20;
 }
