@@ -20,13 +20,15 @@ var LocalPlayer = function (game) {
   this.player.animations.add('move', [0], 0, true)
   this.player.animations.add('stop', [0], 0, true)
 
-  // This will force it to decelerate and limit its speed
-  // player.body.drag.setTo(200, 200)
+  
   game.physics.enable(this.player, Phaser.Physics.ARCADE);
   this.player.enableBody = true; 
   this.player.body.maxVelocity.setTo(400, 400)
   this.player.body.immovable = true
   this.player.body.collideWorldBounds = true
+
+  // This will force it to decelerate and limit its speed
+  this.player.body.drag.setTo(200, 200)
 
   var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
@@ -71,7 +73,7 @@ LocalPlayer.prototype.update = function () {
 
     if (cursors.down.isDown){
       // The speed we'll travel at
-      currentSpeed = -200
+      currentSpeed = -100
     }else{
       if (currentSpeed > 0) {
         currentSpeed -= 4
@@ -137,6 +139,7 @@ LocalPlayer.prototype.takeDamage = function (health,emitter) {
   if(health < 1){
     this.explode(emitter);
     //socket.emit('disconnect')
+    this.player.kill();
     game.state.start('dead');    
   }else{
     this.healthbar.setPercent(health) 

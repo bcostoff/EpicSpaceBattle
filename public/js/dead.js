@@ -1,9 +1,11 @@
 var deadState = {
 
 	create: function(){
-
-		var titleLabel = game.add.text(80,150,'You Died',{font:'30px Arial',fill:'#ffffff'});
-		var startLabel = game.add.text(80,250,'Click to Restart',{font:'20px Arial',fill:'#ffffff'});
+ 
+ 		var deadLabel = game.add.text(0,0,'You Died',{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
+		deadLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, (window.innerHeight * window.devicePixelRatio) -100);
+		var startLabel = game.add.text(0,0,'Click to Restart',{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});
+		startLabel.setTextBounds(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
 
 	},
 
