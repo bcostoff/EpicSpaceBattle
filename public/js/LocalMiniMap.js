@@ -6,6 +6,7 @@ var MiniMap = function(game) {
     } else {       
       var renderWH = game.world.width;    
     }    
+    //renderTexture = game.add.renderTexture(renderWH, renderWH);    
     renderTexture = game.add.renderTexture(100, 100);    
     renderTexture.resolution = resolution;    
     var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
@@ -30,24 +31,24 @@ var MiniMap = function(game) {
     miniMapUI.y = 0;    
 
     miniMapUI.fixedToCamera = true;    
-    //miniMap.fixedToCamera = true;    
-    // viewRect = game.add.graphics(0, 0);    
-    // viewRect.lineStyle(1, 0xFFFFFF);  
+    miniMap.fixedToCamera = true;    
+    viewRect = game.add.graphics(0, 0);    
+    viewRect.lineStyle(1, 0xFFFFFF);  
 
     // //viewRect.drawRect(miniMap.x, miniMap.y, game.camera.view.width * resolution, game.camera.view.height * resolution);      
-    // viewRect.drawRect(0, 0, game.camera.view.width * resolution, game.camera.view.height * resolution);    
+    viewRect.drawRect(0, 0, game.camera.view.width * resolution, game.camera.view.height * resolution);    
 
-    // unitDots = game.add.graphics(miniMap.x, miniMap.y);    
-    // unitDots.fixedToCamera = true;    
-    // var bg = game.add.graphics(0, 0);    
-    // bg.beginFill(0x000000, 1);    
+    unitDots = game.add.graphics(miniMap.x, miniMap.y);    
+    unitDots.fixedToCamera = true;    
+    var bg = game.add.graphics(0, 0);    
+    bg.beginFill(0x000000, 1);    
     
     // //bg.drawRect(0, miniMapUI.y + (miniMapUI.height * .1), miniMapUI.width * .95, miniMapUI.height * .9);    
-    // bg.drawRect(0, 0, miniMapUI.width, miniMapUI.height);    
+    bg.drawRect(0, 0, miniMapUI.width, miniMapUI.height);    
 
-    // bg.fixedToCamera = true;    
-    // var children = [bg, miniMap, unitDots, viewRect, miniMapUI];    
-    var children = [miniMapUI];    
+    bg.fixedToCamera = true;    
+    var children = [bg, miniMap, unitDots, viewRect, miniMapUI];    
+    //var children = [miniMap, miniMapUI];    
     miniMapContainer.addMultiple(children);
 };
 
