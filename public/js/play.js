@@ -58,9 +58,8 @@ var playState = {
       // Start listening for events
       //setEventHandlers()
       onLobbyJoined();
-
       
-      // minimap = new MiniMap(game);
+      minimap = new MiniMap(game);
 
       //createMiniMap();
 
@@ -93,7 +92,7 @@ var playState = {
       }
     }
         
-    //minimap.update(player,enemies)
+    minimap.update(player,enemies)
 
     player.update();
 
