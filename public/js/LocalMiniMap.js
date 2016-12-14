@@ -20,7 +20,7 @@ var MiniMap = function(game) {
     // var miniHeight = miniMapY - (.06 * renderTexture.trueHeight);  
 
     // //miniMap = game.add.sprite(miniWidth, miniHeight, renderTexture);    
-    //miniMap = game.add.sprite(0, 0, renderTexture);    
+    miniMap = game.add.sprite(0, 0, renderTexture);    
 
     var padding = .241 * renderTexture.trueHeight;    
     miniMapUI.width = (renderTexture.trueWidth + padding);    
