@@ -43,7 +43,7 @@ var MiniMap = function(game) {
     bg.beginFill(0x000000, 1);    
     
     //bg.drawRect(0, miniMapUI.y + (miniMapUI.height * .1), miniMapUI.width * .95, miniMapUI.height * .9);    
-    bg.drawRect(0, 0, miniMapUI.width, miniMapUI.height);    
+    bg.drawRect(0, 0, 100, 100);    
 
     bg.fixedToCamera = true;    
     var children = [bg, miniMap, unitDots, viewRect, miniMapUI];    
