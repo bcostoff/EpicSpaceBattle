@@ -8,8 +8,8 @@ var MiniMap = function(game) {
     }    
     renderTexture = game.add.renderTexture(renderWH, renderWH);    
     renderTexture.resolution = resolution;    
-    //var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
-    //renderTexture.crop = cropRect;    
+    var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
+    renderTexture.crop = cropRect;    
     // var miniMapY = game.camera.view.height - (game.world.height * resolution);    
     var miniMapUI = game.add.image(0, 0, 'mini_map');    
     renderTexture.trueWidth = renderTexture.resolution * game.world.width;    
@@ -20,7 +20,7 @@ var MiniMap = function(game) {
     // var miniHeight = miniMapY - (.06 * renderTexture.trueHeight);  
 
     // //miniMap = game.add.sprite(miniWidth, miniHeight, renderTexture);    
-    miniMap = game.add.sprite(0, 0, renderTexture);    
+    //miniMap = game.add.sprite(0, 0, renderTexture);    
 
     var padding = .241 * renderTexture.trueHeight;    
     miniMapUI.width = (renderTexture.trueWidth + padding);    
@@ -30,7 +30,7 @@ var MiniMap = function(game) {
     miniMapUI.y = 0;    
 
     miniMapUI.fixedToCamera = true;    
-    miniMap.fixedToCamera = true;    
+    //miniMap.fixedToCamera = true;    
     // viewRect = game.add.graphics(0, 0);    
     // viewRect.lineStyle(1, 0xFFFFFF);  
 
