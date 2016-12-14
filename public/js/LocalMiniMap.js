@@ -8,14 +8,14 @@ var MiniMap = function(game) {
     }    
     renderTexture = game.add.renderTexture(renderWH, renderWH);    
     renderTexture.resolution = resolution;    
-    //var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
+    var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
     renderTexture.crop = cropRect;    
     // var miniMapY = game.camera.view.height - (game.world.height * resolution);    
     var miniMapUI = game.add.image(0, 0, 'mini_map');    
     renderTexture.trueWidth = renderTexture.resolution * game.world.width;    
     renderTexture.trueHeight = renderTexture.resolution * game.world.height;    
-    var cropRect = new Phaser.Rectangle(0, 0, renderTexture.trueWidth, renderTexture.trueHeight);    
-    renderTexture.crop = cropRect;    
+    //var cropRect = new Phaser.Rectangle(0, 0, renderTexture.trueWidth, renderTexture.trueHeight);    
+    //renderTexture.crop = cropRect;    
     // var miniWidth = .075 * renderTexture.trueWidth;    
     // var miniHeight = miniMapY - (.06 * renderTexture.trueHeight);  
 
