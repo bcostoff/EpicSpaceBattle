@@ -92,7 +92,7 @@ var playState = {
       }
     }
         
-    minimap.update(player,enemies)
+    //minimap.update(player,enemies)
 
     player.update();
 
