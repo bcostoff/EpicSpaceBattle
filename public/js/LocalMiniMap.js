@@ -47,7 +47,7 @@ var MiniMap = function(game) {
 
     bg.fixedToCamera = true;    
     //var children = [bg, miniMap, unitDots, viewRect, miniMapUI];    
-    var children = [miniMap, unitDots, viewRect, miniMapUI];    
+    var children = [miniMapUI];    
     miniMapContainer.addMultiple(children);
 };
 
