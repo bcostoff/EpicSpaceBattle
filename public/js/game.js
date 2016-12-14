@@ -70,4 +70,4 @@ function joinAction(){
 	game.state.start('lobby');
 }
 
-window.onorientationchange = function() { window.location.reload(); };
+// window.onorientationchange = function() { window.location.reload(); };
