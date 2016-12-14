@@ -66,7 +66,7 @@ game.state.start('boot');
 
 function joinAction(){
 	username = $('#gamer_tag').val();
-	$('#main-wrapper').hide();
+	$('#title-screen').hide();
 	game.state.start('lobby');
 }
 
