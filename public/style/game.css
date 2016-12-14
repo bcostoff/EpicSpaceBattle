@@ -7,8 +7,9 @@ canvas {
   	display: block;
 }
 
-#title-screen{	
+#main-wrapper{	
   	z-index: 20;
+  	position: absolute;
 }
 
 #warning-message{
