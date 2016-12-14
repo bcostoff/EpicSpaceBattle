@@ -1,18 +1,8 @@
 body {
-  	margin: 0;
-  	overflow: hidden;
+  margin: 0;
+  overflow: hidden;
 }
 
 canvas {
-  	display: block;
+  display: block;
 }
-
-/* #title-screen{	
-  	z-index: 20;
-}
-
-#warning-message{
-  	z-index: 20;
-  	padding: 10px;
-}
- */
