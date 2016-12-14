@@ -59,7 +59,9 @@ var playState = {
       //setEventHandlers()
       onLobbyJoined();
 
-      //minimap = new MiniMap(game);
+      
+      // minimap = new MiniMap(game);
+
       //createMiniMap();
 
       manager = this.game.plugins.add(Phaser.ParticleStorm);
@@ -91,7 +93,7 @@ var playState = {
       }
     }
         
-    minimap.update(player,enemies)
+    //minimap.update(player,enemies)
 
     player.update();
 
