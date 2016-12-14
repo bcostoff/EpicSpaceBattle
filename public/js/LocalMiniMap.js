@@ -6,7 +6,7 @@ var MiniMap = function(game) {
     } else {       
       var renderWH = game.world.width;    
     }    
-    renderTexture = game.add.renderTexture(renderWH, renderWH);    
+    renderTexture = game.add.renderTexture(100, 100);    
     renderTexture.resolution = resolution;    
     var cropRect = new Phaser.Rectangle(0, 0, 200, 200);    
     renderTexture.crop = cropRect;    
