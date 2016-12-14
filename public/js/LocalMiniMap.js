@@ -17,22 +17,34 @@ var MiniMap = function(game) {
     var cropRect = new Phaser.Rectangle(0, 0, renderTexture.trueWidth, renderTexture.trueHeight);    
     renderTexture.crop = cropRect;    
     var miniWidth = .075 * renderTexture.trueWidth;    
-    var miniHeight = miniMapY - (.06 * renderTexture.trueHeight);    
-    miniMap = game.add.sprite(miniWidth, miniHeight, renderTexture);    
+    var miniHeight = miniMapY - (.06 * renderTexture.trueHeight);  
+
+    //miniMap = game.add.sprite(miniWidth, miniHeight, renderTexture);    
+    miniMap = game.add.sprite(0, 0, renderTexture);    
+
     var padding = .241 * renderTexture.trueHeight;    
     miniMapUI.width = (renderTexture.trueWidth + padding);    
     miniMapUI.height = (renderTexture.trueHeight + padding);    
-    miniMapUI.y = game.camera.view.height - miniMapUI.height;    
+    
+    //miniMapUI.y = game.camera.view.height - miniMapUI.height;    
+    miniMapUI.y = 0;    
+
     miniMapUI.fixedToCamera = true;    
     miniMap.fixedToCamera = true;    
     viewRect = game.add.graphics(0, 0);    
-    viewRect.lineStyle(1, 0xFFFFFF);    
-    viewRect.drawRect(miniMap.x, miniMap.y, game.camera.view.width * resolution, game.camera.view.height * resolution);    
+    viewRect.lineStyle(1, 0xFFFFFF);  
+
+    //viewRect.drawRect(miniMap.x, miniMap.y, game.camera.view.width * resolution, game.camera.view.height * resolution);      
+    viewRect.drawRect(0, 0, game.camera.view.width * resolution, game.camera.view.height * resolution);    
+
     unitDots = game.add.graphics(miniMap.x, miniMap.y);    
     unitDots.fixedToCamera = true;    
     var bg = game.add.graphics(0, 0);    
     bg.beginFill(0x000000, 1);    
-    bg.drawRect(0, miniMapUI.y + (miniMapUI.height * .1), miniMapUI.width * .95, miniMapUI.height * .9);    
+    
+    //bg.drawRect(0, miniMapUI.y + (miniMapUI.height * .1), miniMapUI.width * .95, miniMapUI.height * .9);    
+    bg.drawRect(0, 0, miniMapUI.width, miniMapUI.height);    
+
     bg.fixedToCamera = true;    
     var children = [bg, miniMap, unitDots, viewRect, miniMapUI];    
     miniMapContainer.addMultiple(children);
