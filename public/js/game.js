@@ -40,6 +40,7 @@ var username;
 var pad;
 var stick1;
 var stick2;
+var weapon;
 var dpr = window.devicePixelRatio;
 if(dpr == 1){
 	dpr = 1.5;

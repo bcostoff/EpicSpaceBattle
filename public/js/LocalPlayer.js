@@ -102,14 +102,15 @@ LocalPlayer.prototype.update = function () {
 }
 
 
+
 LocalPlayer.prototype.fireLaser = function () {
   //Fire Laser
   if(game.time.now > laserTime){
     newLaser = newLasers.getFirstExists(false);
     if(newLaser){
-      newLaser.reset(this.player.body.x + 35, this.player.body.y + 35);
+      newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
       if(ship_ver == 1){
-        newLaser.reset(this.player.body.x + 35, this.player.body.y + 35);
+        newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
       //  newLaser = game.add.sprite(this.player.body.x + 35, this.player.body.y + 35, 'laser')
       }else if(ship_ver == 2){
         newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
