@@ -12,15 +12,49 @@ var playState = {
       game.world.setBounds(0, 0, 6144, 6144);
 
       player = new LocalPlayer(game);
-      weapon = new Weapon.SingleBullet(game);
+      //weapon = new Weapon.SingleBullet(game);
+
+      weapons = [];
+      weapons.push(new Weapon.SingleBullet(game));
+      weapons.push(new Weapon.Beam(game));
+
+      console.log(weapons);
+
+      currentWeapon = 0;
+
+      // for(var i = 1; i < weapons.length; i++){
+      //   weapons[i].visible = false;
+      // }
+
+      weapons[currentWeapon].visible = true;
 
       //-----------TEST ITEM---------//
-      // rock = game.add.sprite(100, 100, 'rock')
-      // rock.anchor.setTo(0.5, 0.5)
-      // game.physics.enable(rock, Phaser.Physics.ARCADE);
-      // rock.enableBody = true; 
-      // rock.body.immovable = true;
-      // rock.bringToTop()
+      rock = game.add.sprite(450, 450, 'rock')
+      rock.anchor.setTo(0.5, 0.5)
+      game.physics.enable(rock, Phaser.Physics.ARCADE);
+      rock.enableBody = true; 
+      rock.body.immovable = false;
+      rock.body.drag.setTo(500, 500)
+      rock.bringToTop()
+
+      // var rock_array = [];
+      // var index = 0;
+      // for(var i = 0; i < gridLinesHorizontal; i++){
+      //   for (var j = 0; j < gridLinesVertical; j++){        
+      //     rock_array.push(new Phaser.Point(i * gridSize, j * gridSize));    
+      //   }
+      // } 
+
+      // Phaser.Utils.shuffle(rock_array); 
+
+      // if(spawn){    
+      //   spawnAtPos(rock_array[index]);    
+      //   index++;    
+      //   if (index === rock_array.length) {       
+      //     index = 0;        
+      //     Phaser.Utils.shuffle(rock_array);    
+      //   }
+      // }
 
       // Create some baddies to waste :)
       enemies = []
@@ -81,14 +115,15 @@ var playState = {
 
     //updateUnitDots(player,enemies);
 
-		//-----------TEST ITEM---------//
-    //game.physics.arcade.collide(player, rock, changeHealth, null, this);                
+    //-----------TEST ITEM---------//
+    game.physics.arcade.collide(player.player, rock, hitObstacle, null, this);   
+
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
         enemies[i].update()                
         //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
         //game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this); 
-        game.physics.arcade.collide(weapon, enemies[i].player, damageEnemy, null, this);                  
+        game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);                  
       }
     }
         
@@ -109,13 +144,13 @@ var playState = {
 
     if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
       if(stick2.isDown){
-        weapon.fire(player);
+        weapons[currentWeapon].fire(player.player);
         //player.fireLaser(enemies);
       }
     }else{
       //Fire Laser
       if(game.input.activePointer.isDown){
-        weapon.fire(player.player);
+        weapons[currentWeapon].fire(player.player);
         //player.fireLaser(enemies);
       }
     }
@@ -364,4 +399,9 @@ function damageEnemy(e, l){
 
 function isEven(n) {
    return n % 2 == 0;
+}
+
+
+function hitObstacle(p, r){
+  player.destroyPlayer(emitter);
 }

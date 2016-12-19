@@ -40,7 +40,7 @@ var LocalPlayer = function (game) {
 }
 
 
-LocalPlayer.prototype.update = function () {
+LocalPlayer.prototype.update = function () {  
 
   if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
 
@@ -140,17 +140,28 @@ LocalPlayer.prototype.sendToServer = function (serverUpdate) {
 LocalPlayer.prototype.takeDamage = function (health,emitter) {
   if(health < 1){
     this.explode(emitter);
-    //socket.emit('disconnect')
     this.player.kill();
-    game.state.start('dead');    
+    setTimeout(function(){ 
+      game.state.start('dead');    
+    }, 3000);
+    //socket.emit('disconnect')
   }else{
     this.healthbar.setPercent(health) 
   }  
 }
 
 
+LocalPlayer.prototype.destroyPlayer = function(emitter){  
+  this.explode(emitter);
+  this.player.kill();
+  setTimeout(function(){ 
+    game.state.start('dead');    
+  }, 3000);
+}
+
+
 LocalPlayer.prototype.explode = function(emitter) {
-    emitter.emit('ship_explosion', pointer.x, pointer.y, { total: 32 });
+    emitter.emit('ship_explosion', this.player.x, this.player.y, { total: 32 });
 }
 
 

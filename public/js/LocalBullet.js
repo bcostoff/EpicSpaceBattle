@@ -87,6 +87,7 @@ Weapon.SingleBullet.prototype.fire = function (source) {
 
 
 
+//SPLIT SHOT, WORKING ON IT
 
 Weapon.SplitShot = function (game) {
 
@@ -111,7 +112,7 @@ Weapon.SplitShot.prototype.fire = function (source) {
 
   if (this.game.time.time < this.nextFire) { return; }
 
-  var myPoint = new Phaser.Point(source.width / 2 + 10, -source.height / 2 + 40);
+  var myPoint = new Phaser.Point((source.width/2) + 150, (-source.height/2) + 40);
   myPoint.rotate(0,0,source.angle,true,40);
 
   this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, source.angle, this.bulletSpeed, 0, -500);
@@ -119,5 +120,47 @@ Weapon.SplitShot.prototype.fire = function (source) {
   this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, source.angle, this.bulletSpeed, 0, 500);
 
   this.nextFire = this.game.time.time + this.fireRate;
+
+};
+
+
+
+
+
+
+
+
+Weapon.Beam = function (game) {
+
+  Phaser.Group.call(this, game, game.world, 'Beam', false, true, Phaser.Physics.ARCADE);
+
+  this.nextFire = 0;
+  this.bulletSpeed = 1000;
+  this.fireRate = 45;
+
+  for (var i = 0; i < 500; i++){
+    this.add(new Bullet(game, 'big_laser'), true);
+  }
+
+  return this;
+
+};
+
+Weapon.Beam.prototype = Object.create(Phaser.Group.prototype);
+Weapon.Beam.prototype.constructor = Weapon.Beam;
+
+Weapon.Beam.prototype.fire = function (source) {
+
+  if (this.game.time.time < this.nextFire) { return; }
+
+
+    var myPoint = new Phaser.Point((source.width/2) + 150, (-source.height/2) + 40);
+    myPoint.rotate(0,0,source.angle,true,40);
+
+    this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, source.angle, this.bulletSpeed, 0, 0);  
+    socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: source.angle})
+
+
+    this.nextFire = this.game.time.time + this.fireRate;
 
 };
