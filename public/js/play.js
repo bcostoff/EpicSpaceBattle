@@ -18,8 +18,6 @@ var playState = {
       weapons.push(new Weapon.SingleBullet(game));
       weapons.push(new Weapon.Beam(game));
 
-      console.log(weapons);
-
       currentWeapon = 0;
 
       // for(var i = 1; i < weapons.length; i++){
@@ -116,14 +114,15 @@ var playState = {
     //updateUnitDots(player,enemies);
 
     //-----------TEST ITEM---------//
-    game.physics.arcade.collide(player.player, rock, hitObstacle, null, this);   
+    game.physics.arcade.collide(player.player, rock, playerHitObstacle, null, this);   
 
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
         enemies[i].update()                
         //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
         //game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this); 
-        game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);                  
+        game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);      
+        game.physics.arcade.collide(enemies[i].player, rock, enemyHitObstacle, null, this);               
       }
     }
         
@@ -157,10 +156,9 @@ var playState = {
 
 	},
 
-
-    // render: function(){
-
-    // }
+  shutdown: function() {  
+    player.player.destroy();
+  }
 
 }
 
@@ -402,6 +400,19 @@ function isEven(n) {
 }
 
 
-function hitObstacle(p, r){
+function playerHitObstacle(p, r){
   player.destroyPlayer(emitter);
+}
+
+
+function enemyHitObstacle(e, r){
+  var enemyDestroyed = playerById(e.name)
+
+  // Player not found
+  if (!enemyDestroyed) {
+    console.log('Laser not found: ', e.name)
+    return
+  }
+
+  enemyDestroyed.destroyPlayer(emitter);
 }

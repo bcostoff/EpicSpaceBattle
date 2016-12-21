@@ -141,6 +141,7 @@ LocalPlayer.prototype.takeDamage = function (health,emitter) {
   if(health < 1){
     this.explode(emitter);
     this.player.kill();
+    socket.emit('remove player');
     setTimeout(function(){ 
       game.state.start('dead');    
     }, 3000);
@@ -154,6 +155,7 @@ LocalPlayer.prototype.takeDamage = function (health,emitter) {
 LocalPlayer.prototype.destroyPlayer = function(emitter){  
   this.explode(emitter);
   this.player.kill();
+  socket.emit('remove player');
   setTimeout(function(){ 
     game.state.start('dead');    
   }, 3000);

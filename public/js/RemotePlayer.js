@@ -68,6 +68,11 @@ RemotePlayer.prototype.takeDamage = function (health,emitter) {
   }  
 }
 
+RemotePlayer.prototype.destroyPlayer = function(emitter){  
+  this.explode(emitter);
+  this.player.kill();
+}
+
 RemotePlayer.prototype.explode = function(emitter) {
     emitter.emit('ship_explosion', this.player.x, this.player.y, { total: 32 });
 }
