@@ -158,6 +158,11 @@ var playState = {
 
   shutdown: function() {  
     player.player.destroy();
+    for(var i = 0; i < enemies.length; i++){
+      if (enemies[i].alive) {
+        enemies[i].player.destroy();                             
+      }
+    }
   }
 
 }
