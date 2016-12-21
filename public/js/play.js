@@ -160,6 +160,7 @@ var playState = {
     player.player.destroy();
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
+        enemies[i].player.kill();    
         enemies[i].player.destroy();                             
       }
     }
