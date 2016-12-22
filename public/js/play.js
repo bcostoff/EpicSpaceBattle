@@ -26,14 +26,48 @@ var playState = {
 
       weapons[currentWeapon].visible = true;
 
+
+      //-----------TEST OBSTACLES---------//
+      obs_1 = [
+        [200, 220],
+        [900, 900],
+        [480, 480],
+        [1100, 1260],
+        [2000, 1560],
+        [2100, 1460],
+        [3200, 1600],
+        [3200, 1800],
+        [3100, 1700],
+        [3280, 1750],
+        [3300, 1840],
+        [3450, 1900],
+        [5600, 1000],
+        [4280, 5100],
+        [5500, 4800],
+        [3450, 5280]
+      ];
+
+      obstacles = game.add.group();
+
+      for(var i = 0; i < obs_1.length; i++){
+        var tmp = game.add.sprite(obs_1[i][0], obs_1[i][1], 'rock')
+        tmp.anchor.setTo(0.5, 0.5)
+        game.physics.enable(tmp, Phaser.Physics.ARCADE);
+        tmp.enableBody = true; 
+        tmp.body.immovable = false;
+        tmp.body.drag.setTo(500, 500)
+        tmp.bringToTop()
+        obstacles.add(tmp)
+      }
+
       //-----------TEST ITEM---------//
-      rock = game.add.sprite(450, 450, 'rock')
-      rock.anchor.setTo(0.5, 0.5)
-      game.physics.enable(rock, Phaser.Physics.ARCADE);
-      rock.enableBody = true; 
-      rock.body.immovable = false;
-      rock.body.drag.setTo(500, 500)
-      rock.bringToTop()
+      item = game.add.sprite(450, 450, 'item')
+      item.anchor.setTo(0.5, 0.5)
+      game.physics.enable(item, Phaser.Physics.ARCADE);
+      item.enableBody = true; 
+      item.body.immovable = false;
+      item.body.drag.setTo(500, 500)
+      item.bringToTop()
 
       // var rock_array = [];
       // var index = 0;
@@ -113,8 +147,15 @@ var playState = {
 
     //updateUnitDots(player,enemies);
 
-    //-----------TEST ITEM---------//
-    game.physics.arcade.collide(player.player, rock, playerHitObstacle, null, this);   
+
+    //-----------TEST OBSTACLE---------//
+    game.physics.arcade.collide(player.player, obstacles, playerHitObstacle, null, this);             
+
+
+    //-----------ACTIVATE ITEM---------//
+    game.physics.arcade.collide(weapons[currentWeapon], item, activateItem, null, this);      
+    game.physics.arcade.collide(player.player, item, playerHitObstacle, null, this);      
+    
 
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
@@ -411,6 +452,25 @@ function playerHitObstacle(p, r){
 }
 
 
+function activateItem(p, i){
+  i.kill()
+  emitter.emit('ship_explosion', i.x, i.y, { total: 32 });
+  i.destroy()
+  currentWeapon = 1;
+  setTimeout(function(){ 
+    //-----------TEST ITEM---------//
+    item = game.add.sprite(getRandomInt(300,5844), getRandomInt(300,5844), 'item')
+    item.anchor.setTo(0.5, 0.5)
+    game.physics.enable(item, Phaser.Physics.ARCADE);
+    item.enableBody = true; 
+    item.body.immovable = false;
+    item.body.drag.setTo(500, 500)
+    item.bringToTop()
+    currentWeapon = 0;
+  }, 10000);
+}
+
+
 function enemyHitObstacle(e, r){
   var enemyDestroyed = playerById(e.name)
 
@@ -421,4 +481,9 @@ function enemyHitObstacle(e, r){
   }
 
   enemyDestroyed.destroyPlayer(emitter);
+}
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

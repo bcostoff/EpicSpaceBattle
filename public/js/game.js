@@ -51,6 +51,7 @@ if(dpr == 1){
 var scaleRatio = dpr / 3;
 var manager = null;
 var emitter = null;
+var obstacles;
 
 // if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
 // 	screen.orientation.lock('landscape');

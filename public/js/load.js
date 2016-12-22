@@ -20,6 +20,7 @@ var loadState = {
                 game.load.image('flare_point', 'assets/flare_point.png');
                 game.load.image('flare_vertical', 'assets/flare_vertical.png');
                 game.load.image('rock', 'assets/rock.png');
+                game.load.image('item', 'assets/item.png');
                 //game.load.image("background", "images/jungle-bg-2.png");
 
 	},
