@@ -61,7 +61,7 @@ var playState = {
       }
 
       //-----------TEST ITEM---------//
-      item = game.add.sprite(450, 450, 'item')
+      item = game.add.sprite(getRandomInt(300,5844), getRandomInt(300,5844), 'item')
       item.anchor.setTo(0.5, 0.5)
       game.physics.enable(item, Phaser.Physics.ARCADE);
       item.enableBody = true; 

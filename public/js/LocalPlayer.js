@@ -5,8 +5,13 @@ var LocalPlayer = function (game) {
   //var startX = Math.round(Math.random() * (1000) - 500)
   //var startY = Math.round(Math.random() * (1000) - 500)
 
-  var startX = 550;
-  var startY = 550;
+  if(team == 'green'){
+    var startX = 500;
+    var startY = 3052;
+  }else if(team == 'blue'){
+    var startX = 5644;
+    var startY = 3052;
+  }
 
   if(ship_ver == 1){
     this.player = game.add.sprite(startX, startY, 'dude-' + team)            
@@ -34,6 +39,11 @@ var LocalPlayer = function (game) {
   this.healthbar = new HealthBar(game, barConfig);
   this.player.addChild(this.healthbar.bgSprite)
   this.player.addChild(this.healthbar.barSprite)  
+
+  if(team == 'blue'){
+    this.player.angle = 180;
+  }
+
 
   //NEW CODE TO EMIT
   this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
@@ -103,33 +113,33 @@ LocalPlayer.prototype.update = function () {
 
 
 
-LocalPlayer.prototype.fireLaser = function () {
-  //Fire Laser
-  if(game.time.now > laserTime){
-    newLaser = newLasers.getFirstExists(false);
-    if(newLaser){
-      newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
-      if(ship_ver == 1){
-        newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
-      //  newLaser = game.add.sprite(this.player.body.x + 35, this.player.body.y + 35, 'laser')
-      }else if(ship_ver == 2){
-        newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
-      //  newLaser = game.add.sprite(this.player.body.x + 40, this.player.body.y + 40, 'laser-alt')
-      }      
-      //newLaser.enableBody = true; 
-      //newLaser.anchor.setTo(0.5, 0.5)
-      game.physics.enable(newLaser, Phaser.Physics.ARCADE)
-      //newLaser.body.collideWorldBounds = false
-      newLaser.lifespan = 2000;
-      newLaser.rotation = this.player.rotation;      
-      newLaser.angle = this.player.angle
-      //newLaser.body.immovable = true
-      game.physics.arcade.velocityFromRotation(this.player.rotation, 800, newLaser.body.velocity);
-      laserTime = game.time.now + 100;
-      socket.emit('new laser', {x: newLaser.x, y: newLaser.y, angle: newLaser.angle})
-    }
-  }  
-}
+// LocalPlayer.prototype.fireLaser = function () {
+//   //Fire Laser
+//   if(game.time.now > laserTime){
+//     newLaser = newLasers.getFirstExists(false);
+//     if(newLaser){
+//       newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
+//       if(ship_ver == 1){
+//         newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
+//       //  newLaser = game.add.sprite(this.player.body.x + 35, this.player.body.y + 35, 'laser')
+//       }else if(ship_ver == 2){
+//         newLaser.reset(this.player.body.x + 40, this.player.body.y + 40);
+//       //  newLaser = game.add.sprite(this.player.body.x + 40, this.player.body.y + 40, 'laser-alt')
+//       }      
+//       //newLaser.enableBody = true; 
+//       //newLaser.anchor.setTo(0.5, 0.5)
+//       game.physics.enable(newLaser, Phaser.Physics.ARCADE)
+//       //newLaser.body.collideWorldBounds = false
+//       newLaser.lifespan = 2000;
+//       newLaser.rotation = this.player.rotation;      
+//       newLaser.angle = this.player.angle
+//       //newLaser.body.immovable = true
+//       game.physics.arcade.velocityFromRotation(this.player.rotation, 800, newLaser.body.velocity);
+//       laserTime = game.time.now + 100;
+//       socket.emit('new laser', {x: newLaser.x, y: newLaser.y, angle: newLaser.angle})
+//     }
+//   }  
+// }
 
 
 LocalPlayer.prototype.sendToServer = function (serverUpdate) {
