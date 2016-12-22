@@ -452,10 +452,10 @@ function playerHitObstacle(p, r){
 }
 
 
-function activateItem(p, i){
-  i.kill()
+function activateItem(w, i){
+  i.kill();
   emitter.emit('ship_explosion', i.x, i.y, { total: 32 });
-  i.destroy()
+  i.destroy();
   currentWeapon = 1;
   setTimeout(function(){ 
     //-----------TEST ITEM---------//
