@@ -61,7 +61,7 @@ var playState = {
       }
 
       //-----------TEST ITEM---------//
-      item = game.add.sprite(getRandomInt(300,5844), getRandomInt(300,5844), 'item')
+      item = game.add.sprite(600, 600, 'item')
       item.anchor.setTo(0.5, 0.5)
       game.physics.enable(item, Phaser.Physics.ARCADE);
       item.enableBody = true; 
@@ -69,24 +69,6 @@ var playState = {
       item.body.drag.setTo(500, 500)
       item.bringToTop()
 
-      // var rock_array = [];
-      // var index = 0;
-      // for(var i = 0; i < gridLinesHorizontal; i++){
-      //   for (var j = 0; j < gridLinesVertical; j++){        
-      //     rock_array.push(new Phaser.Point(i * gridSize, j * gridSize));    
-      //   }
-      // } 
-
-      // Phaser.Utils.shuffle(rock_array); 
-
-      // if(spawn){    
-      //   spawnAtPos(rock_array[index]);    
-      //   index++;    
-      //   if (index === rock_array.length) {       
-      //     index = 0;        
-      //     Phaser.Utils.shuffle(rock_array);    
-      //   }
-      // }
 
       // Create some baddies to waste :)
       enemies = []
@@ -366,7 +348,7 @@ function onNewLaser (data) {
   }
   //console.log('New Laser: ', data.id)
   //console.log('Creating new laser')
-  lasers.push(new RemoteLaser(data.id, game, laser, data.x, data.y, data.angle))
+  lasers.push(new RemoteLaser(data.id, game, laser, data.x, data.y, data.angle, data.type))
   lasers.splice(lasers.indexOf(data.id), 1)
 }
 
@@ -459,7 +441,7 @@ function activateItem(w, i){
   currentWeapon = 1;
   setTimeout(function(){ 
     //-----------TEST ITEM---------//
-    item = game.add.sprite(getRandomInt(300,5844), getRandomInt(300,5844), 'item')
+    item = game.add.sprite(600, 600, 'item')
     item.anchor.setTo(0.5, 0.5)
     game.physics.enable(item, Phaser.Physics.ARCADE);
     item.enableBody = true; 
@@ -467,7 +449,7 @@ function activateItem(w, i){
     item.body.drag.setTo(500, 500)
     item.bringToTop()
     currentWeapon = 0;
-  }, 10000);
+  }, 20000);
 }
 
 

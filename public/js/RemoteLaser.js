@@ -1,15 +1,21 @@
 /* global game */
 
-var RemoteLaser = function (index, game, laser, startX, startY, startAngle) {
+var RemoteLaser = function (index, game, laser, startX, startY, startAngle, startType) {
   //console.log('New remote laser')
   var x = startX
   var y = startY
   var angle = startAngle
+  var type = startType
 
   this.game = game
   this.laser = laser
 
-  this.laser = game.add.sprite(x, y, 'laser')
+  if(type == 'single'){
+    this.laser = game.add.sprite(x, y, 'laser')
+  }else if(type == 'beam'){
+    this.laser = game.add.sprite(x, y, 'big_laser')
+  }
+  
   this.laser.anchor.setTo(0.5, 0.5)
   this.laser.name = index.toString()
   this.laser.lifespan = 2000;

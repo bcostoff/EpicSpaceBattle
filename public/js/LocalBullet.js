@@ -51,6 +51,10 @@ Bullet.prototype.update = function () {
 
 var Weapon = {};
 
+
+
+//SINGLE LASER SHOT
+
 Weapon.SingleBullet = function (game) {
 
   Phaser.Group.call(this, game, game.world, 'Single Bullet', false, true, Phaser.Physics.ARCADE);
@@ -78,7 +82,7 @@ Weapon.SingleBullet.prototype.fire = function (source) {
   myPoint.rotate(0,0,source.angle,true,40);
 
   this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, source.angle, this.bulletSpeed, 0, 0);  
-  socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: source.angle})
+  socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: source.angle, type: 'single'})
 
   this.nextFire = this.game.time.time + this.fireRate;
 
@@ -126,9 +130,7 @@ Weapon.SplitShot.prototype.fire = function (source) {
 
 
 
-
-
-
+//BEAM SHOT
 
 Weapon.Beam = function (game) {
 
@@ -158,7 +160,7 @@ Weapon.Beam.prototype.fire = function (source) {
     myPoint.rotate(0,0,source.angle,true,40);
 
     this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, source.angle, this.bulletSpeed, 0, 0);  
-    socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: source.angle})
+    socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: source.angle, type: 'beam'})
 
 
     this.nextFire = this.game.time.time + this.fireRate;
