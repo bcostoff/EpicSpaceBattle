@@ -4,19 +4,26 @@ var playState = {
 
 		  //socket = io.connect()
 
-      // Our tiled scrolling background
+      //-----------CREATE GAMEWORLD---------//
       space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
       //space.fixedToCamera = true;
 
       // Resize our game world to be a 2000 x 2000 square
       game.world.setBounds(0, 0, 6144, 6144);
 
-      player = new LocalPlayer(game);
-      //weapon = new Weapon.SingleBullet(game);
 
+
+
+      //-----------NEW LOCAL PLAYER---------//
+      player = new LocalPlayer(game);
+
+
+
+      //-----------CREATE WEAPONS ARRAY---------//
       weapons = [];
       weapons.push(new Weapon.SingleBullet(game));
       weapons.push(new Weapon.Beam(game));
+      weapons.push(new Weapon.SingleCapitalBullet(game));
 
       currentWeapon = 0;
 
@@ -60,6 +67,8 @@ var playState = {
         obstacles.add(tmp)
       }
 
+
+
       //-----------TEST ITEM---------//
       item = game.add.sprite(600, 600, 'item')
       item.anchor.setTo(0.5, 0.5)
@@ -70,27 +79,40 @@ var playState = {
       item.bringToTop()
 
 
-      // Create some baddies to waste :)
+
+      //-----------CAPITAL SHIPS---------//
+      capitalG = new LocalCapitalShip(game,'green');
+      capitalB = new LocalCapitalShip(game,'blue');
+
+
+
+      //-----------ENEMY SHIPS/LASER ARRAY---------//
       enemies = []
       lasers = []
 
-      newLasers = game.add.group();
-      newLasers.enableBody = true;
-      newLasers.physicsBodyType = Phaser.Physics.ARCADE;     
-      if(ship_ver == 1){    
-        newLasers.createMultiple(1000,'laser');
-      }else if(ship_ver == 2){
-        newLasers.createMultiple(1000,'laser-alt');
-      }
-      newLasers.setAll('checkWorldBounds', true);
-      newLasers.setAll('outOfBoundsKill', true);   
+      // newLasers = game.add.group();
+      // newLasers.enableBody = true;
+      // newLasers.physicsBodyType = Phaser.Physics.ARCADE;     
+      // if(ship_ver == 1){    
+      //   newLasers.createMultiple(1000,'laser');
+      // }else if(ship_ver == 2){
+      //   newLasers.createMultiple(1000,'laser-alt');
+      // }
+      // newLasers.setAll('checkWorldBounds', true);
+      // newLasers.setAll('outOfBoundsKill', true);   
 
-      //console.log(player);
+
+
+
+      //-----------CAMERA CONTROLS---------//
       game.camera.follow(player.player);
       //game.camera.deadzone = new Phaser.Rectangle(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio)
       //game.camera.focusOnXY(player.x, player.y)
       //game.camera.deadzone = new Phaser.Rectangle(500, 500, 500, 500);
 
+
+
+      //-----------JOYSTICK FOR MOBILE---------//
       if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
         pad = game.plugins.add(Phaser.VirtualJoystick);
         stick1 = pad.addStick(0, 0, 100, 'arcade');
@@ -104,12 +126,18 @@ var playState = {
         game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
       }
 
-      // Start listening for events
-      //setEventHandlers()
+
+      //-----------LOBBY JOINED---------//
       onLobbyJoined();
+
+
       
+      //-----------INITIALISE MINIMAP---------//
       minimap = new MiniMap(game);
 
+
+
+      //-----------CREATE PARTICLE MANAGER---------//
       manager = this.game.plugins.add(Phaser.ParticleStorm);
       var data = {
         lifespan: { min: 500, max: 2000 },
@@ -129,30 +157,54 @@ var playState = {
 
     //updateUnitDots(player,enemies);
 
-
     //-----------TEST OBSTACLE---------//
     game.physics.arcade.collide(player.player, obstacles, playerHitObstacle, null, this);             
 
 
-    //-----------ACTIVATE ITEM---------//
+    //-----------ACTIVATE ITEM---------//    
     game.physics.arcade.collide(weapons[currentWeapon], item, activateItem, null, this);      
     game.physics.arcade.collide(player.player, item, playerHitObstacle, null, this);      
-    
 
+
+    //-----------CAPITAL SHIP COLLISIONS---------//
+    game.physics.arcade.collide(weapons[currentWeapon], capitalB.capitalShip, damageCapitalShip, null, this);   
+    game.physics.arcade.collide(weapons[currentWeapon], capitalG.capitalShip, damageCapitalShip, null, this);   
+
+
+    //-----------PLAYER COLLISIONS---------//
+    game.physics.arcade.collide(weapons[2], player.player, takeHeavyDamage, null, this);      
+
+
+    //-----------ENEMY COLLISIONS---------//
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
         enemies[i].update()                
-        //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)    
-        //game.physics.arcade.collide(newLasers, enemies[i].player, damageEnemy, null, this); 
+        //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)     
+        game.physics.arcade.collide(weapons[2], enemies[i].player, damageEnemy, null, this);      
         game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);      
         game.physics.arcade.collide(enemies[i].player, rock, enemyHitObstacle, null, this);               
       }
     }
-        
-    minimap.update(player,enemies)
+      
 
+
+    //-----------MINIMAP UPDATE---------//    
+    minimap.update(player,enemies,capitalG,capitalB)
+
+
+
+    //-----------PLAYER UPDATE---------//
     player.update();
 
+
+
+    //-----------CAPITAL SHIP UPDATE---------//
+    capitalB.update(player);
+    capitalG.update(player);
+
+
+
+    //-----------SCROLL BACKGROUND---------//
     space.tilePosition.x = -game.camera.x
     space.tilePosition.y = -game.camera.y
 
@@ -164,6 +216,8 @@ var playState = {
     //  }
     //}
 
+
+    //-----------FIRE WEAPONS---------//
     if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
       if(stick2.isDown){
         weapons[currentWeapon].fire(player.player);
@@ -192,6 +246,8 @@ var playState = {
 }
 
 
+
+//-----------EVENT HANDLERS---------//
 var setEventHandlers = function () {
   // Socket connection successful
   socket.on('connect', onSocketConnected)
@@ -217,8 +273,14 @@ var setEventHandlers = function () {
   // New laser message received
   socket.on('new laser', onNewLaser)
 
+  // New item destroyed message received
+  socket.on('item destoryed', onItemDestroyed)
+
   // Take Damage message received
   socket.on('take damage', onTakeDamage)
+
+  // Take Damage message received
+  socket.on('take capital damage', onTakeCapitalDamage)
 
   socket.on('player count', function(data) {
       playerCount = data.num_of_players;
@@ -255,17 +317,20 @@ function onSocketConnected () {
 function onLobbyJoined () {
   console.log('Lobby Joined')
 
+
   // Reset enemies on reconnect
   enemies.forEach(function (enemy) {
     enemy.player.kill()
   })
   enemies = []
 
+
   // Reset lasers on reconnect
   lasers.forEach(function (laser) {
     laser.laser.kill()
   })
   lasers = []
+
 
   // Send local player data to the game server
   //console.log('Player picked ship: ' + ship_ver)
@@ -337,6 +402,22 @@ function onTakeDamage (data) {
     player.takeDamage(data.health,emitter)
   }  
 }
+
+
+// Take capital damage
+function onTakeCapitalDamage (data) {  
+  // if(data.health == 0){
+  //   //socket.emit('disconnect')
+  //   //game.state.start('dead');    
+  // }else{
+    if(data.team == 'green'){
+      capitalG.takeCapitalDamage(data.health,emitter)
+    }else{
+      capitalB.takeCapitalDamage(data.health,emitter)
+    }    
+  //}  
+}
+
 
 // New laser
 function onNewLaser (data) {
@@ -424,6 +505,21 @@ function damageEnemy(e, l){
   // }
 }
 
+function damageCapitalShip(c, w){
+  //console.log('Capital Ship Hit')
+  w.kill();
+  if(player.team == 'green' && c.name == 'green'){
+    //Do Nothing
+  }else if(player.team == 'green' && c.name == 'blue'){
+    capitalB.takeCapitalDamage(capitalB.healthbar.getPercentage(),emitter)
+  }else if(player.team == 'blue' && c.name == 'blue'){
+    //Do Nothing
+  }else if(player.team == 'green' && c.name == 'green'){
+    capitalG.takeCapitalDamage(capitalG.healthbar.getPercentage(),emitter)
+  }
+  socket.emit('take capital damage', { damageType: 'laser' })  
+}
+
 function isEven(n) {
    return n % 2 == 0;
 }
@@ -438,6 +534,7 @@ function activateItem(w, i){
   i.kill();
   emitter.emit('ship_explosion', i.x, i.y, { total: 32 });
   i.destroy();
+  socket.emit('item destroyed')
   currentWeapon = 1;
   setTimeout(function(){ 
     //-----------TEST ITEM---------//
@@ -451,6 +548,37 @@ function activateItem(w, i){
     currentWeapon = 0;
   }, 20000);
 }
+
+
+function onItemDestroyed(){
+  item.kill();
+  emitter.emit('ship_explosion', item.x, item.y, { total: 32 });
+  item.destroy();
+  setTimeout(function(){ 
+    //-----------TEST ITEM---------//
+    item = game.add.sprite(600, 600, 'item')
+    item.anchor.setTo(0.5, 0.5)
+    game.physics.enable(item, Phaser.Physics.ARCADE);
+    item.enableBody = true; 
+    item.body.immovable = false;
+    item.body.drag.setTo(500, 500)
+    item.bringToTop()
+  }, 20000);
+}
+
+
+function takeHeavyDamage(p, l){
+  l.kill();
+  console.log(player.healthbar.getPercentage());
+  if(player.healthbar.getPercentage() == 0){
+    //socket.emit('disconnect')
+    game.state.start('dead');    
+  }else{
+    newHealth = player.healthbar.getPercentage() - 10;
+    player.takeDamage(newHealth,emitter)
+  }  
+}
+
 
 
 function enemyHitObstacle(e, r){

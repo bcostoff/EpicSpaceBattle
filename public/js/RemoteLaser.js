@@ -14,6 +14,8 @@ var RemoteLaser = function (index, game, laser, startX, startY, startAngle, star
     this.laser = game.add.sprite(x, y, 'laser')
   }else if(type == 'beam'){
     this.laser = game.add.sprite(x, y, 'big_laser')
+  }else if(type == 'capital_laser'){
+    this.laser = game.add.sprite(x, y, 'capital_laser')
   }
   
   this.laser.anchor.setTo(0.5, 0.5)
@@ -40,6 +42,8 @@ RemoteLaser.prototype.update = function () {
   //   socket.emit('move laser', { x: this.laser.x, y: this.laser.y, angle: this.laser.angle })
     
   } else {
+
+
 
   }
 

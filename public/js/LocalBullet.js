@@ -166,3 +166,42 @@ Weapon.Beam.prototype.fire = function (source) {
     this.nextFire = this.game.time.time + this.fireRate;
 
 };
+
+
+
+//SINGLE LASER SHOT FROM CAPITAL SHIP
+
+Weapon.SingleCapitalBullet = function (game) {
+
+  Phaser.Group.call(this, game, game.world, 'Single Capital Bullet', false, true, Phaser.Physics.ARCADE);
+
+  this.nextFire = 0;
+  this.bulletSpeed = 500;
+  this.fireRate = 200;
+
+  for (var i = 0; i < 500; i++){
+    this.add(new Bullet(game, 'capital_laser'), true);
+  }
+
+  return this;
+
+};
+
+Weapon.SingleCapitalBullet.prototype = Object.create(Phaser.Group.prototype);
+Weapon.SingleCapitalBullet.prototype.constructor = Weapon.SingleCapitalBullet;
+
+Weapon.SingleCapitalBullet.prototype.fire = function (source, player) {
+
+  if (this.game.time.time < this.nextFire) { return; }  
+
+  var myPoint = new Phaser.Point(source.width / 2 + 10, -source.height / 2 + 40);
+  myPoint.rotate(0,0,source.angle,true,40);
+
+  newAngle = game.physics.arcade.angleBetween(source, player);
+
+  this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, newAngle*100, this.bulletSpeed, 0, 0);  
+  socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: newAngle*100, type: 'capital_laser'})
+
+  this.nextFire = this.game.time.time + this.fireRate;
+
+};

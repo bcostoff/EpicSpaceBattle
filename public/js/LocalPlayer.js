@@ -24,7 +24,7 @@ var LocalPlayer = function (game) {
   this.player.anchor.setTo(0.5, 0.5)
   this.player.animations.add('move', [0], 0, true)
   this.player.animations.add('stop', [0], 0, true)
-
+  this.team = team;
   
   game.physics.enable(this.player, Phaser.Physics.ARCADE);
   this.player.enableBody = true; 

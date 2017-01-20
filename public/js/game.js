@@ -27,6 +27,7 @@ var ver2
 var newLaser
 var newLasers
 var rock
+var capital
 var healthbar
 var minimap
 var playerCount = 0;
