@@ -114,14 +114,14 @@ var playState = {
       //game.camera.deadzone = new Phaser.Rectangle(500, 500, 500, 500);
 
 
-      // var edge = 100;
-      // game.camera.deadzone = new Phaser.Rectangle(edge, edge, game.camera.width - (edge * 2), game.camera.height - (edge * 2));
-      // game.camera.focusOn(player.player);
+      var edge = 100;
+      game.camera.deadzone = new Phaser.Rectangle(edge, edge, game.camera.width - (edge * 2), game.camera.height - (edge * 2));
+      game.camera.focusOn(player.player);
 
-      if (this.game.device.desktop) {
+      //if (this.game.device.desktop) {
         // Only autofollow if we're on desktop.
         game.camera.follow(player.player, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT)
-      }
+      //}
 
 
 
