@@ -30,29 +30,30 @@ var rock
 var capital
 var healthbar
 var minimap
-var playerCount = 0;
-var titleLabel;
-var team;
-var teamLabel;
+var playerCount = 0
+var titleLabel
+var team
+var teamLabel
 var timer
 var timerEvent
-var text;
-var username;
-var pad;
-var stick1;
-var stick2;
+var text
+var username
+var pad
+var stick1
+var stick2
 //var weapon;
-var weapons;
-var currentWeapon = 0;
-var weaponName = null;
+var weapons
+var currentWeapon = 0
+var weaponName = null
 var dpr = window.devicePixelRatio;
 if(dpr == 1){
-	dpr = 1.5;
+	dpr = 1.5
 }
-var scaleRatio = dpr / 3;
-var manager = null;
-var emitter = null;
-var obstacles;
+var scaleRatio = dpr / 3
+var manager = null
+var emitter = null
+var obstacles
+var planet
 
 // if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
 // 	screen.orientation.lock('landscape');

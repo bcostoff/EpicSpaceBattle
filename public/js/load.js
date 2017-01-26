@@ -23,6 +23,7 @@ var loadState = {
                 game.load.image('rock', 'assets/rock.png');
                 game.load.image('item', 'assets/item.png');
                 game.load.image('capital-green', 'assets/Star_Destroyer.png');
+                game.load.image('planet', 'assets/planet-compressor.png');
                 //game.load.image("background", "images/jungle-bg-2.png");
 
 	},

@@ -11,7 +11,7 @@ var playState = {
       // Resize our game world to be a 2000 x 2000 square
       game.world.setBounds(0, 0, 6144, 6144);
 
-
+      planet = game.add.sprite(-1200, 1000, 'planet')         
 
 
       //-----------NEW LOCAL PLAYER---------//
@@ -105,10 +105,23 @@ var playState = {
 
 
       //-----------CAMERA CONTROLS---------//
-      game.camera.follow(player.player);
+      //This will work
+      //game.camera.follow(player.player)
+
+
       //game.camera.deadzone = new Phaser.Rectangle(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio)
-      //game.camera.focusOnXY(player.x, player.y)
+      //game.camera.focusOnXY(player.player.x, player.player.y)
       //game.camera.deadzone = new Phaser.Rectangle(500, 500, 500, 500);
+
+
+      var edge = 100;
+      game.camera.deadzone = new Phaser.Rectangle(edge, edge, game.camera.width - (edge * 2), game.camera.height - (edge * 2));
+      game.camera.focusOn(player.player);
+
+      if (this.game.device.desktop) {
+        // Only autofollow if we're on desktop.
+        game.camera.follow(player.player, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT)
+      }
 
 
 
