@@ -5,13 +5,13 @@ var playState = {
 		  //socket = io.connect()
 
       //-----------CREATE GAMEWORLD---------//
-      space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+      space = game.add.tileSprite(0, 0, 4000, 4000, 'space');
       //space.fixedToCamera = true;
 
       // Resize our game world to be a 2000 x 2000 square
-      game.world.setBounds(0, 0, 6144, 6144);
+      game.world.setBounds(0, 0, 4000, 4000);
 
-      planet = game.add.sprite(-1200, 1000, 'planet')         
+      planet = game.add.sprite(-1200, 700, 'planet')         
 
 
       //-----------NEW LOCAL PLAYER---------//
@@ -42,16 +42,16 @@ var playState = {
         [1100, 1260],
         [2000, 1560],
         [2100, 1460],
-        [3200, 1600],
-        [3200, 1800],
-        [3100, 1700],
-        [3280, 1750],
-        [3300, 1840],
-        [3450, 1900],
-        [5600, 1000],
-        [4280, 5100],
-        [5500, 4800],
-        [3450, 5280]
+        [1200, 1600],
+        [1200, 1800],
+        [2100, 1700],
+        [2280, 2750],
+        [1300, 840],
+        [450, 1900],
+        [2600, 1000],
+        [2280, 100],
+        [1500, 800],
+        [1450, 2280]
       ];
 
       obstacles = game.add.group();

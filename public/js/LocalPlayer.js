@@ -7,10 +7,10 @@ var LocalPlayer = function (game) {
 
   if(team == 'green'){
     var startX = 500;
-    var startY = 3052;
+    var startY = 2000;
   }else if(team == 'blue'){
-    var startX = 5644;
-    var startY = 3052;
+    var startX = 2500;
+    var startY = 2000;
   }
 
   if(ship_ver == 1){
@@ -33,7 +33,8 @@ var LocalPlayer = function (game) {
   this.player.body.collideWorldBounds = true
 
   // This will force it to decelerate and limit its speed
-  this.player.body.drag.setTo(200, 200)
+  //this.player.body.drag.setTo(200, 200)
+  this.player.body.drag.setTo(200)
 
   var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(game, barConfig);
@@ -86,8 +87,8 @@ LocalPlayer.prototype.update = function () {
       // The speed we'll travel at
       currentSpeed = -100
     }else{
-      if (currentSpeed > 0) {
-        currentSpeed -= 4
+      if (currentSpeed < 0) {
+        currentSpeed += 4
       }
     }
 

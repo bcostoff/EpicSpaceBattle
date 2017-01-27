@@ -3,7 +3,7 @@ var registerShipState = {
 	create: function(){
 
 		// Our tiled scrolling background
-	    space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+	    space = game.add.tileSprite(0, 0, 4000, 4000, 'space');
 	    game.world.setBounds(0, 0, window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
 		
 		var titleLabel = game.add.text(0, 0,'Choose Your Ship',{font:'30px Arial',fill:'#ffffff', align: "center", boundsAlignH: "center", boundsAlignV: "middle"});

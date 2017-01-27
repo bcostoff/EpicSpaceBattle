@@ -4,10 +4,10 @@ var LocalCapitalShip = function (game,t) {
 
   if(t == 'green'){
     var startX = 200;
-    var startY = 2500;
+    var startY = 2000;
   }else if(t == 'blue'){
-    var startX = 5944;
-    var startY = 4500;
+    var startX = 3800;
+    var startY = 2000;
   }
 
   this.capitalShip = game.add.sprite(startX, startY, 'capital-green')        

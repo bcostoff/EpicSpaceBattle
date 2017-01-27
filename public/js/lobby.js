@@ -3,7 +3,7 @@ var lobbyState = {
 	create: function(){
 
 		// Our tiled scrolling background
-	    space = game.add.tileSprite(0, 0, 6144, 6144, 'space');
+	    space = game.add.tileSprite(0, 0, 4000, 4000, 'space');
 
 		socket = io.connect();
 		pCount = 0;
