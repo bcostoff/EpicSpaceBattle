@@ -4,10 +4,10 @@ var loadState = {
 
 		var loadingLabel = game.add.text(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio,'loading...',{font:'30px Arial',fill:'#ffffff'});
 
-		//game.load.image('space', 'assets/space-bg.jpg')
+		game.load.image('space', 'assets/starfield.jpg')
                 //game.load.spritesheet('dude', 'assets/ship3.png', 83, 74)
                 game.load.atlas('arcade', 'assets/arcade-joystick.png', 'assets/arcade-joystick.json');
-                game.load.image('space', 'assets/tileable-space.jpg')
+                //game.load.image('space', 'assets/tileable-space.jpg')
                 game.load.spritesheet('dude-green', 'assets/G1.png', 160, 160)
                 game.load.spritesheet('dude-alt-green', 'assets/G2.png', 160, 160)
                 game.load.spritesheet('dude-blue', 'assets/B1.png', 160, 160)
