@@ -219,8 +219,8 @@ var playState = {
 
 
     //-----------SCROLL BACKGROUND---------//
-    space.tilePosition.x = -game.camera.x
-    space.tilePosition.y = -game.camera.y
+    //space.tilePosition.x = -game.camera.x
+    //space.tilePosition.y = -game.camera.y
 
     //if (game.input.activePointer.isDown) {
     //  if (game.physics.arcade.distanceToPointer(player) >= 10) {
