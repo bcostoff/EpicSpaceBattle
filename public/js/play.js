@@ -5,7 +5,8 @@ var playState = {
 		  //socket = io.connect()
 
       //-----------CREATE GAMEWORLD---------//
-      space = game.add.tileSprite(0, 0, 4000, 4000, 'space');
+      //space = game.add.tileSprite(0, 0, 4000, 4000, 'space');
+      space = game.add.sprite(0, 0, 'space') 
       //space.fixedToCamera = true;
 
       // Resize our game world to be a 2000 x 2000 square
