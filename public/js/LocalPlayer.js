@@ -51,7 +51,7 @@ var LocalPlayer = function (game) {
 }
 
 
-LocalPlayer.prototype.update = function () {  
+LocalPlayer.prototype.update = function (shipEmitter) {  
 
   if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)) {
 
@@ -77,6 +77,8 @@ LocalPlayer.prototype.update = function () {
     if (cursors.up.isDown){
       // The speed we'll travel at
       currentSpeed = 400
+      shipEmitter.emit('ship_spark', this.player.x, this.player.y, { repeat: 0, frequency: 70 });
+      shipEmitter.emit('ship_flame', this.player.x, this.player.y, { repeat: 0, frequency: 20 });
     }else{
       if (currentSpeed > 0) {
           currentSpeed -= 4

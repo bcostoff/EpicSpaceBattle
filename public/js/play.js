@@ -12,12 +12,56 @@ var playState = {
       // Resize our game world to be a 2000 x 2000 square
       game.world.setBounds(0, 0, 4000, 4000);
 
-      planet = game.add.sprite(-1200, 700, 'planet')         
+      planet = game.add.sprite(-1200, 700, 'planet')       
 
 
-      //-----------NEW LOCAL PLAYER---------//
-      player = new LocalPlayer(game);
 
+      //-----------CREATE PARTICLE MANAGER---------//
+      manager = this.game.plugins.add(Phaser.ParticleStorm);
+
+      var shipExplosion = {
+        lifespan: { min: 500, max: 2000 },
+        image: ['flare_diamond', 'flare_point', 'flare_vertical'],
+        scale: { min: 0.2, max: 0.4 },
+        rotation: { delta: 3 },
+        velocity: { radial: { arcStart: -90, arcEnd: 90 }, initial: { min: 3, max: 6 }, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.5 }, { x: 1, y: 0 } ]  }
+      };
+
+
+      var flame = {
+        lifespan: 100,
+        image: 'white',
+        bringToTop: true,
+        blendMode: 'ADD',
+        hsv: { initial: 0, value: 70, control: 'linear' },
+        alpha: { initial: 0, value: 1, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.8 }, { x: 1, y: 0 } ] },
+        scale: { min: 0.05, max: 0.3 },
+        vx: { min: -0.2, max: 0.2 },
+        vy: { min: -0.2, max: 0.2 }
+      };
+
+
+      var spark = {
+          lifespan: 200,
+          image: 'white',
+          bringToTop: true,
+          blendMode: 'ADD',
+          alpha: { initial: 0, value: 1, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.9 }, { x: 1, y: 0 } ] },
+          scale: { initial: 0, value: 1, control: 'linear' },
+          vx: { min: -0.05, max: 0.3 },
+          vy: { min: -0.05, max: 0.3  }
+      };
+
+
+      manager.addData('ship_explosion', shipExplosion);
+      manager.addData('ship_spark', spark);
+      manager.addData('ship_flame', flame);
+
+      explosionEmitter = manager.createEmitter();
+      shipEmitter = manager.createEmitter();
+      //emitter.force.y = 0.1;
+      explosionEmitter.addToWorld();
+      shipEmitter.addToWorld();
 
 
       //-----------CREATE WEAPONS ARRAY---------//
@@ -26,6 +70,8 @@ var playState = {
       weapons.push(new Weapon.Beam(game));
       weapons.push(new Weapon.SingleCapitalBullet(game));
 
+
+
       currentWeapon = 0;
 
       // for(var i = 1; i < weapons.length; i++){
@@ -33,6 +79,10 @@ var playState = {
       // }
 
       weapons[currentWeapon].visible = true;
+
+
+      //-----------NEW LOCAL PLAYER---------//
+      player = new LocalPlayer(game);
 
 
       //-----------TEST OBSTACLES---------//
@@ -150,21 +200,6 @@ var playState = {
       minimap = new MiniMap(game);
 
 
-
-      //-----------CREATE PARTICLE MANAGER---------//
-      manager = this.game.plugins.add(Phaser.ParticleStorm);
-      var data = {
-        lifespan: { min: 500, max: 2000 },
-        image: ['flare_diamond', 'flare_point', 'flare_vertical'],
-        scale: { min: 0.2, max: 0.4 },
-        rotation: { delta: 3 },
-        velocity: { radial: { arcStart: -90, arcEnd: 90 }, initial: { min: 3, max: 6 }, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.5 }, { x: 1, y: 0 } ]  }
-      };
-      manager.addData('ship_explosion', data);
-      emitter = manager.createEmitter();
-      //emitter.force.y = 0.1;
-      emitter.addToWorld();
-
 	},
 
 	update: function(){
@@ -208,7 +243,7 @@ var playState = {
 
 
     //-----------PLAYER UPDATE---------//
-    player.update();
+    player.update(shipEmitter);
 
 
 
@@ -413,7 +448,7 @@ function onTakeDamage (data) {
     //socket.emit('disconnect')
     game.state.start('dead');    
   }else{
-    player.takeDamage(data.health,emitter)
+    player.takeDamage(data.health,explosionEmitter)
   }  
 }
 
@@ -425,9 +460,9 @@ function onTakeCapitalDamage (data) {
   //   //game.state.start('dead');    
   // }else{
     if(data.team == 'green'){
-      capitalG.takeCapitalDamage(data.health,emitter)
+      capitalG.takeCapitalDamage(data.health,explosionEmitter)
     }else{
-      capitalB.takeCapitalDamage(data.health,emitter)
+      capitalB.takeCapitalDamage(data.health,explosionEmitter)
     }    
   //}  
 }
@@ -513,7 +548,7 @@ function damageEnemy(e, l){
     return
   }
 
-  enemyDamaged.takeDamage(enemyDamaged.healthbar.getPercentage(),emitter)
+  enemyDamaged.takeDamage(enemyDamaged.healthbar.getPercentage(),explosionEmitter)
   socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
   l.kill();   
   // }
@@ -525,11 +560,11 @@ function damageCapitalShip(c, w){
   if(player.team == 'green' && c.name == 'green'){
     //Do Nothing
   }else if(player.team == 'green' && c.name == 'blue'){
-    capitalB.takeCapitalDamage(capitalB.healthbar.getPercentage(),emitter)
+    capitalB.takeCapitalDamage(capitalB.healthbar.getPercentage(),explosionEmitter)
   }else if(player.team == 'blue' && c.name == 'blue'){
     //Do Nothing
   }else if(player.team == 'green' && c.name == 'green'){
-    capitalG.takeCapitalDamage(capitalG.healthbar.getPercentage(),emitter)
+    capitalG.takeCapitalDamage(capitalG.healthbar.getPercentage(),explosionEmitter)
   }
   socket.emit('take capital damage', { damageType: 'laser' })  
 }
@@ -540,13 +575,13 @@ function isEven(n) {
 
 
 function playerHitObstacle(p, r){
-  player.destroyPlayer(emitter);
+  player.destroyPlayer(explosionEmitter);
 }
 
 
 function activateItem(w, i){
   i.kill();
-  emitter.emit('ship_explosion', i.x, i.y, { total: 32 });
+  explosionEmitter.emit('ship_explosion', i.x, i.y, { total: 32 });
   i.destroy();
   socket.emit('item destroyed')
   currentWeapon = 1;
@@ -566,7 +601,7 @@ function activateItem(w, i){
 
 function onItemDestroyed(){
   item.kill();
-  emitter.emit('ship_explosion', item.x, item.y, { total: 32 });
+  explosionEmitter.emit('ship_explosion', item.x, item.y, { total: 32 });
   item.destroy();
   setTimeout(function(){ 
     //-----------TEST ITEM---------//
@@ -589,7 +624,7 @@ function takeHeavyDamage(p, l){
     game.state.start('dead');    
   }else{
     newHealth = player.healthbar.getPercentage() - 10;
-    player.takeDamage(newHealth,emitter)
+    player.takeDamage(newHealth,explosionEmitter)
   }  
 }
 
@@ -604,7 +639,7 @@ function enemyHitObstacle(e, r){
     return
   }
 
-  enemyDestroyed.destroyPlayer(emitter);
+  enemyDestroyed.destroyPlayer(explosionEmitter);
 }
 
 

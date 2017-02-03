@@ -35,13 +35,16 @@ var LocalCapitalShip = function (game,t) {
 
 LocalCapitalShip.prototype.update = function (player) {  
 
-  if(player.team == this.team){
-    //Do Nothing
-  }else{
+  // COMMENTED OUT TO TEST FIRING ROTATION
+  // if(player.team == this.team){
+  //   //Do Nothing
+  // }else{
     if(game.physics.arcade.distanceBetween(player.player, this.capitalShip) < 700){     
       weapons[2].fire(this.capitalShip, player.player);
     }
-  }
+  // }
+
+
 
   //NEW CODE TO EMIT
   // this.newServerUpdate = { health: this.healthbar.getPercentage(), team: t }

@@ -191,7 +191,8 @@ Weapon.SingleCapitalBullet.prototype = Object.create(Phaser.Group.prototype);
 Weapon.SingleCapitalBullet.prototype.constructor = Weapon.SingleCapitalBullet;
 
 Weapon.SingleCapitalBullet.prototype.fire = function (source, player) {
-  console.log(source.team);
+  //console.log(source.team);
+  console.log(source.rotation);
   if (this.game.time.time < this.nextFire) { return; }  
 
   var myPoint = new Phaser.Point(source.width / 2 + 10, -source.height / 2 + 40);

@@ -49,6 +49,9 @@ RemotePlayer.prototype.update = function () {
     //ADDED BELOW TO SMOOTH MOVEMENT
     game.add.tween(this.player).to( { x: this.player.x, y: this.player.y }, this.game.time.physicsElapsed, Phaser.Easing.Default, true);
     this.player.rotation = Math.PI + game.physics.arcade.angleToXY(this.player, this.lastPosition.x, this.lastPosition.y)
+    
+    
+    
   } else {
     //this.player.play('stop')
   }
