@@ -29,7 +29,7 @@ var playState = {
 
 
       var flame = {
-        lifespan: 100,
+        lifespan: 190,
         image: 'white',
         bringToTop: true,
         blendMode: 'ADD',
@@ -47,7 +47,8 @@ var playState = {
           bringToTop: true,
           blendMode: 'ADD',
           alpha: { initial: 0, value: 1, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.9 }, { x: 1, y: 0 } ] },
-          scale: { initial: 0, value: 1, control: 'linear' },
+          //scale: { initial: 0, value: 1, control: 'linear' },
+          scale: { min: 0.05, max: 0.6 },
           vx: { min: -0.05, max: 0.3 },
           vy: { min: -0.05, max: 0.3  }
       };
