@@ -49,9 +49,10 @@ RemotePlayer.prototype.update = function () {
     //ADDED BELOW TO SMOOTH MOVEMENT
     game.add.tween(this.player).to( { x: this.player.x, y: this.player.y }, this.game.time.physicsElapsed, Phaser.Easing.Default, true);
     this.player.rotation = Math.PI + game.physics.arcade.angleToXY(this.player, this.lastPosition.x, this.lastPosition.y)
-    
-    
-    
+    if (this.player.x !== this.lastPosition.x || this.player.y !== this.lastPosition.y){
+      shipEmitter.emit('ship_spark', this.player.x, this.player.y, { repeat: 0, frequency: 70 });
+      shipEmitter.emit('ship_flame', this.player.x, this.player.y, { repeat: 0, frequency: 20 });
+    }    
   } else {
     //this.player.play('stop')
   }

@@ -227,7 +227,7 @@ var playState = {
     //-----------ENEMY COLLISIONS---------//
     for(var i = 0; i < enemies.length; i++){
       if (enemies[i].alive) {
-        enemies[i].update()                
+        enemies[i].update(shipEmitter)                
         //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)     
         game.physics.arcade.collide(weapons[2], enemies[i].player, damageEnemy, null, this);      
         game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);      
