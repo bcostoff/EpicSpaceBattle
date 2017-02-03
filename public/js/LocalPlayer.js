@@ -60,6 +60,8 @@ LocalPlayer.prototype.update = function (shipEmitter) {
     if (stick1.isDown){
       game.physics.arcade.velocityFromRotation(stick1.rotation, stick1.force * currentSpeed, this.player.body.velocity);
       this.player.rotation = stick1.rotation;
+      shipEmitter.emit('ship_spark', this.player.x, this.player.y, { repeat: 0, frequency: 70 });
+      shipEmitter.emit('ship_flame', this.player.x, this.player.y, { repeat: 0, frequency: 20 });
     }
     // }else{
     //   this.player.body.velocity.set(0);
