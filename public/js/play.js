@@ -619,7 +619,7 @@ function onItemDestroyed(){
 
 function takeHeavyDamage(p, l){
   l.kill();
-  console.log(player.healthbar.getPercentage());
+  //console.log(player.healthbar.getPercentage());
   if(player.healthbar.getPercentage() == 0){
     //socket.emit('disconnect')
     game.state.start('dead');    

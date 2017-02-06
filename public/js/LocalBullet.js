@@ -192,7 +192,7 @@ Weapon.SingleCapitalBullet.prototype.constructor = Weapon.SingleCapitalBullet;
 
 Weapon.SingleCapitalBullet.prototype.fire = function (source, player) {
   //console.log(source.team);
-  console.log(source.rotation);
+  //console.log(source.angle);
   if (this.game.time.time < this.nextFire) { return; }  
 
   var myPoint = new Phaser.Point(source.width / 2 + 10, -source.height / 2 + 40);
@@ -200,8 +200,8 @@ Weapon.SingleCapitalBullet.prototype.fire = function (source, player) {
 
   newAngle = game.physics.arcade.angleBetween(source, player);
 
-  this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, newAngle*100, this.bulletSpeed, 0, 0);  
-  socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: newAngle*100, type: 'capital_laser'})
+  this.getFirstExists(false).fire(source.x+myPoint.x, source.y+myPoint.y, newAngle*60, this.bulletSpeed, 0, 0);  
+  socket.emit('new laser', {x: source.x+myPoint.x, y: source.y+myPoint.y, angle: newAngle*60, type: 'capital_laser'})
 
   this.nextFire = this.game.time.time + this.fireRate;
 
