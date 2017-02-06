@@ -13,6 +13,7 @@ var LocalCapitalShip = function (game,t) {
   this.capitalShip = game.add.sprite(startX, startY, 'capital-green')        
   this.team = t;
 
+  this.capitalShip.scale.setTo(scaleRatio, scaleRatio);
   this.capitalShip.anchor.setTo(0.5, 0.5)
   game.physics.enable(this.capitalShip, Phaser.Physics.ARCADE);
   this.capitalShip.enableBody = true; 

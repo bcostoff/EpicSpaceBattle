@@ -16,7 +16,7 @@ var playState = {
 
 
 
-      //-----------CREATE PARTICLE MANAGER---------//
+      //-----------CREATE PARTICLE MANAGER---------// 
       manager = this.game.plugins.add(Phaser.ParticleStorm);
 
       var shipExplosion = {
@@ -35,7 +35,7 @@ var playState = {
         blendMode: 'ADD',
         hsv: { initial: 0, value: 70, control: 'linear' },
         alpha: { initial: 0, value: 1, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.8 }, { x: 1, y: 0 } ] },
-        scale: { min: 0.05, max: 0.3 },
+        scale: { min: 0.05*scaleRatio, max: 0.3*scaleRatio },
         vx: { min: -0.2, max: 0.2 },
         vy: { min: -0.2, max: 0.2 }
       };
@@ -48,7 +48,7 @@ var playState = {
           blendMode: 'ADD',
           alpha: { initial: 0, value: 1, control: [ { x: 0, y: 1 }, { x: 0.5, y: 0.9 }, { x: 1, y: 0 } ] },
           //scale: { initial: 0, value: 1, control: 'linear' },
-          scale: { min: 0.05, max: 0.6 },
+          scale: { min: 0.05*scaleRatio, max: 0.6*scaleRatio },
           vx: { min: -0.05, max: 0.3 },
           vy: { min: -0.05, max: 0.3  }
       };
