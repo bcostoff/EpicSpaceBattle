@@ -40,16 +40,18 @@ LocalCapitalShip.prototype.update = function (player) {
   if(player.team == this.team){
     //Do Nothing
   }else{
-    if(game.physics.arcade.distanceBetween(player.player, this.capitalShip) < 700){     
-      weapons[2].fire(this.capitalShip, player.player);
+    if(this.healthbar > 1){
+      if(game.physics.arcade.distanceBetween(player.player, this.capitalShip) < 700){     
+        weapons[2].fire(this.capitalShip, player.player);
+      }
     }
   }
 
 
 
   //NEW CODE TO EMIT
-  // this.newServerUpdate = { health: this.healthbar.getPercentage(), team: t }
-  // this.sendToServer(this.newServerUpdate);
+  //this.newServerUpdate = { health: this.healthbar.getPercentage(), team: t }
+  //this.sendToServer(this.newServerUpdate);
 
 }
 
@@ -63,7 +65,7 @@ LocalCapitalShip.prototype.takeCapitalDamage = function (health,emitter) {
     this.explode(emitter);
     this.capitalShip.kill();
   }else{
-    newHealth = health - 10;
+    newHealth = health - 1;
     this.healthbar.setPercent(newHealth) 
   }  
 }
