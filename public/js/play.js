@@ -251,7 +251,7 @@ var playState = {
 
     //-----------AI UPDATE---------//
     if (ai != null || ai != undefined){
-        ai.update(shipEmitter,weapons,player,capitalG,capitalB);
+        ai.update(shipEmitter,player,capitalG,capitalB);
     }
     
 

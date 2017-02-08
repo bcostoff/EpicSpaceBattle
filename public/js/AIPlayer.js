@@ -43,13 +43,19 @@ var AIPlayer = function (game,player) {
     this.aiplayer.angle = 180;
   }
 
+  //-----------CREATE WEAPONS ARRAY---------//
+  this.weapons = [];
+  this.weapons.push(new Weapon.SingleBullet(this.game));
+  this.currentWeapon = 0;
+  this.weapons[this.currentWeapon].visible = true;
+
 
   //NEW CODE TO EMIT
   this.newServerUpdate = { x: this.aiplayer.x, y: this.aiplayer.y, angle: this.aiplayer.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
 }
 
 
-AIPlayer.prototype.update = function (shipEmitter,weapons,player,capitalG,capitalB) {  
+AIPlayer.prototype.update = function (shipEmitter,player,capitalG,capitalB) {  
 
   if(this.team == 'green'){
     var target = capitalB.capitalShip
@@ -66,14 +72,14 @@ AIPlayer.prototype.update = function (shipEmitter,weapons,player,capitalG,capita
     var shortestAngle = this.getShortestAngle(angleTo, this.aiplayer.angle);
     var newAngle = this.aiplayer.angle + shortestAngle;
     this.game.add.tween(this.aiplayer).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
-    weapons[0].fire(this.aiplayer);
+    this.weapons[0].fire(this.aiplayer);
   }else{
     var angleTo = Phaser.Math.radToDeg(this.aiplayer.position.angle(target.position));
     var shortestAngle = this.getShortestAngle(angleTo, this.aiplayer.angle);
     var newAngle = this.aiplayer.angle + shortestAngle;
     this.game.add.tween(this.aiplayer).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
     if(this.game.physics.arcade.distanceBetween(this.aiplayer, target) < 600 && this.game.physics.arcade.distanceBetween(this.aiplayer, target) > 200){
-      weapons[0].fire(this.aiplayer);
+      this.weapons[0].fire(this.aiplayer);
     }
   }
 
