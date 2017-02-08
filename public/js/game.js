@@ -54,6 +54,7 @@ var manager = null
 var emitter = null
 var obstacles
 var planet
+var ai
 
 // if(/(iPhone|iPod|iPad)/i.test(navigator.userAgent)){
 // 	screen.orientation.lock('landscape');

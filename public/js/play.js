@@ -230,6 +230,7 @@ var playState = {
       if (enemies[i].alive) {
         enemies[i].update(shipEmitter)                
         //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)     
+        game.physics.arcade.collide(player.player, enemies[i].player)     
         game.physics.arcade.collide(weapons[2], enemies[i].player, damageEnemy, null, this);      
         game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);      
         game.physics.arcade.collide(enemies[i].player, rock, enemyHitObstacle, null, this);               
@@ -246,6 +247,13 @@ var playState = {
     //-----------PLAYER UPDATE---------//
     player.update(shipEmitter);
 
+
+
+    //-----------AI UPDATE---------//
+    if (ai != null || ai != undefined){
+        ai.update(shipEmitter,weapons,player,capitalG,capitalB);
+    }
+    
 
 
     //-----------CAPITAL SHIP UPDATE---------//
@@ -308,11 +316,14 @@ var setEventHandlers = function () {
   // New player message received
   socket.on('new player', onNewPlayer)
 
+  // New AI Player
+  socket.on('new ai player', onNewAIPlayer)
+
   // New player message received
   socket.on('lobby joined', onLobbyJoined)
 
   // Player move message received
-  socket.on('move player', onMovePlayer)
+  socket.on('move player', onMovePlayer)  
 
   // Player move message received
   socket.on('move laser', onMoveLaser)
@@ -385,6 +396,11 @@ function onLobbyJoined () {
   // Send local player data to the game server
   //console.log('Player picked ship: ' + ship_ver)
   socket.emit('new player', { x: player.x, y: player.y, angle: player.angle, ver: ship_ver, health: 100, team: team, username: username })
+
+  if(playerCount == 1){
+    ai = new AIPlayer(game,player)
+    socket.emit('new ai player', { x: ai.x, y: ai.y, angle: ai.angle, ver: 1, health: 100, team: ai.team, username: 'Computer' })
+  }
 }
 
 
@@ -400,16 +416,24 @@ function onNewPlayer (data) {
   console.log('Total Players: ', data.num_of_players)
   //console.log('New player uses: ', data.ver)
 
-  // Avoid possible duplicate players
+  //AVOID DUPLICATE PLAYERS AS WELL AS LOCAL PLAYER
   var duplicate = playerById(data.id)
   if (duplicate) {
     console.log('Duplicate player!')
     return
   }
-  // Add new player to the remote players array
+
+  //ADD EXISTING PLAYERS TO ENEMIES ARRAY
   enemies.push(new RemotePlayer(data.id, game, data.x, data.y, data.angle, data.ver, data.health, data.team, data.username))
+   
 }
 
+
+// New AI
+function onNewAIPlayer (data) {
+  //ADD AI PLAYER TO ENEMIES ARRAY
+  enemies.push(new RemotePlayer(data.id, game, data.x, data.y, data.angle, data.ver, data.health, data.team, data.username))  
+}
 
 
 // Move player

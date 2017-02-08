@@ -29,7 +29,7 @@ var LocalPlayer = function (game) {
   game.physics.enable(this.player, Phaser.Physics.ARCADE);
   this.player.enableBody = true; 
   this.player.body.maxVelocity.setTo(400, 400)
-  this.player.body.immovable = true
+  this.player.body.immovable = false
   this.player.body.collideWorldBounds = true
 
   // This will force it to decelerate and limit its speed
