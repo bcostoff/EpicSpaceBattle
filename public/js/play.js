@@ -230,9 +230,9 @@ var playState = {
       if (enemies[i].alive) {
         enemies[i].update(shipEmitter)                
         //game.physics.arcade.collide(player.player, enemies[i].player, crashPlayers, null, this)     
-        game.physics.arcade.collide(player.player, enemies[i].player)     
+        //game.physics.arcade.collide(player.player, enemies[i].player)     
         game.physics.arcade.collide(weapons[2], enemies[i].player, damageEnemy, null, this);      
-        game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);      
+        game.physics.arcade.collide(weapons[currentWeapon], enemies[i].player, damageEnemy, null, this);       
         game.physics.arcade.collide(enemies[i].player, rock, enemyHitObstacle, null, this);               
       }
     }
@@ -251,7 +251,10 @@ var playState = {
 
     //-----------AI UPDATE---------//
     if (ai != null || ai != undefined){
-        ai.update(shipEmitter,player,capitalG,capitalB);
+        ai.update(shipEmitter,player,capitalG,capitalB);  
+        game.physics.arcade.collide(ai.weapons[0], player.player, takeAIDamage, null, this);   
+        game.physics.arcade.collide(weapons[currentWeapon], ai.player, damageAI, null, this);  
+        //game.physics.arcade.collide(player.player, ai.player)     
     }
     
 
@@ -569,7 +572,7 @@ function damageEnemy(e, l){
 
   // Player not found
   if (!enemyDamaged) {
-    console.log('Laser not found: ', e.name)
+    console.log('Laser not found: -> ', e.name)
     return
   }
 
@@ -593,6 +596,14 @@ function damageCapitalShip(c, w){
   }
   socket.emit('take capital damage', { damageType: 'laser' })  
 }
+
+
+function damageAI(e, l){
+  ai.takeDamage(ai.healthbar.getPercentage(),explosionEmitter)
+  socket.emit('take damage', { damageType: 'laser', enemy: e.name, laser: l.name })
+  l.kill();   
+}
+
 
 function isEven(n) {
    return n % 2 == 0;
@@ -642,6 +653,19 @@ function onItemDestroyed(){
 
 
 function takeHeavyDamage(p, l){
+  l.kill();
+  //console.log(player.healthbar.getPercentage());
+  if(player.healthbar.getPercentage() == 0){
+    //socket.emit('disconnect')
+    game.state.start('dead');    
+  }else{
+    newHealth = player.healthbar.getPercentage() - 25;
+    player.takeDamage(newHealth,explosionEmitter)
+  }  
+}
+
+
+function takeAIDamage(p, l){
   l.kill();
   //console.log(player.healthbar.getPercentage());
   if(player.healthbar.getPercentage() == 0){

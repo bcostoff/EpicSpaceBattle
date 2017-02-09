@@ -16,31 +16,31 @@ var AIPlayer = function (game,player) {
   }
 
   this.game = game
-  this.aiplayer = this.game.add.sprite(startX, startY, 'dude-' + this.team)         
+  this.player = this.game.add.sprite(startX, startY, 'dude-' + this.team)         
 
   // this.player.scale.setTo(0.5, 0.5);
-  this.aiplayer.scale.setTo(scaleRatio, scaleRatio);
-  this.aiplayer.anchor.setTo(0.5, 0.5)
-  this.aiplayer.animations.add('move', [0], 0, true)
-  this.aiplayer.animations.add('stop', [0], 0, true)
+  this.player.scale.setTo(scaleRatio, scaleRatio);
+  this.player.anchor.setTo(0.5, 0.5)
+  this.player.animations.add('move', [0], 0, true)
+  this.player.animations.add('stop', [0], 0, true)
   
-  this.game.physics.enable(this.aiplayer, Phaser.Physics.ARCADE);
-  this.aiplayer.enableBody = true; 
-  this.aiplayer.body.maxVelocity.setTo(400, 400)
-  this.aiplayer.body.immovable = false
-  this.aiplayer.body.collideWorldBounds = true
+  this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
+  this.player.enableBody = true; 
+  this.player.body.maxVelocity.setTo(400, 400)
+  this.player.body.immovable = true
+  this.player.body.collideWorldBounds = true
 
   // This will force it to decelerate and limit its speed
   //this.player.body.drag.setTo(200, 200)
-  this.aiplayer.body.drag.setTo(200)
+  this.player.body.drag.setTo(200)
 
   var barConfig = {x: -5, y: 0};
   this.healthbar = new HealthBar(this.game, barConfig);
-  this.aiplayer.addChild(this.healthbar.bgSprite)
-  this.aiplayer.addChild(this.healthbar.barSprite)  
+  this.player.addChild(this.healthbar.bgSprite)
+  this.player.addChild(this.healthbar.barSprite)  
 
   if(this.team == 'blue'){
-    this.aiplayer.angle = 180;
+    this.player.angle = 180;
   }
 
   //-----------CREATE WEAPONS ARRAY---------//
@@ -51,7 +51,7 @@ var AIPlayer = function (game,player) {
 
 
   //NEW CODE TO EMIT
-  this.newServerUpdate = { x: this.aiplayer.x, y: this.aiplayer.y, angle: this.aiplayer.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
+  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: ship_ver, health: this.healthbar.getPercentage(), username: username }
 }
 
 
@@ -64,29 +64,31 @@ AIPlayer.prototype.update = function (shipEmitter,player,capitalG,capitalB) {
   }
 
   this.currentSpeed = 300
-  shipEmitter.emit('ship_spark', this.aiplayer.x, this.aiplayer.y, { repeat: 0, frequency: 70 });
-  shipEmitter.emit('ship_flame', this.aiplayer.x, this.aiplayer.y, { repeat: 0, frequency: 20 });
+  shipEmitter.emit('ship_spark', this.player.x, this.player.y, { repeat: 0, frequency: 70 });
+  shipEmitter.emit('ship_flame', this.player.x, this.player.y, { repeat: 0, frequency: 20 });
 
-  if(this.game.physics.arcade.distanceBetween(this.aiplayer, player.player) < 600 && this.game.physics.arcade.distanceBetween(this.aiplayer, player.player) > 200){
-    var angleTo = Phaser.Math.radToDeg(this.aiplayer.position.angle(player.player.position));
-    var shortestAngle = this.getShortestAngle(angleTo, this.aiplayer.angle);
-    var newAngle = this.aiplayer.angle + shortestAngle;
-    this.game.add.tween(this.aiplayer).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
-    this.weapons[0].fire(this.aiplayer);
+  if(this.game.physics.arcade.distanceBetween(this.player, player.player) < 600 && this.game.physics.arcade.distanceBetween(this.player, player.player) > 200){
+    var angleTo = Phaser.Math.radToDeg(this.player.position.angle(player.player.position));
+    var shortestAngle = this.getShortestAngle(angleTo, this.player.angle);
+    var newAngle = this.player.angle + shortestAngle;
+    this.game.add.tween(this.player).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
+    this.weapons[0].fire(this.player);
   }else{
-    var angleTo = Phaser.Math.radToDeg(this.aiplayer.position.angle(target.position));
-    var shortestAngle = this.getShortestAngle(angleTo, this.aiplayer.angle);
-    var newAngle = this.aiplayer.angle + shortestAngle;
-    this.game.add.tween(this.aiplayer).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
-    if(this.game.physics.arcade.distanceBetween(this.aiplayer, target) < 600 && this.game.physics.arcade.distanceBetween(this.aiplayer, target) > 200){
-      this.weapons[0].fire(this.aiplayer);
+    var angleTo = Phaser.Math.radToDeg(this.player.position.angle(target.position));
+    var shortestAngle = this.getShortestAngle(angleTo, this.player.angle);
+    var newAngle = this.player.angle + shortestAngle;
+    this.game.add.tween(this.player).to({angle: newAngle}, 150, Phaser.Easing.Linear.None, true);
+    if(this.game.physics.arcade.distanceBetween(this.player, target) < 600 && this.game.physics.arcade.distanceBetween(this.player, target) > 200){
+      this.weapons[0].fire(this.player);
     }
   }
 
-  this.game.physics.arcade.velocityFromRotation(this.aiplayer.rotation, this.currentSpeed, this.aiplayer.body.velocity)
+  this.game.physics.arcade.velocityFromRotation(this.player.rotation, this.currentSpeed, this.player.body.velocity)
+
+  //this.game.physics.arcade.collide(this.weapons[this.currentWeapon], player.player, this.damageEnemy, null, this);  
 
   //NEW CODE TO EMIT
-  this.newServerUpdate = { x: this.aiplayer.x, y: this.aiplayer.y, angle: this.aiplayer.angle, ver: 1, health: this.healthbar.getPercentage(), username: 'Computer' }
+  this.newServerUpdate = { x: this.player.x, y: this.player.y, angle: this.player.angle, ver: 1, health: this.healthbar.getPercentage(), username: 'Computer' }
   this.sendToServer(this.newServerUpdate);
 
   //OLD CODE TO EMIT
@@ -133,7 +135,7 @@ AIPlayer.prototype.sendToServer = function (serverUpdate) {
 AIPlayer.prototype.takeDamage = function (health,emitter) {
   if(health < 1){
     this.explode(emitter);
-    this.aiplayer.kill();
+    this.player.kill();
     socket.emit('remove player');
     setTimeout(function(){ 
       this.game.state.start('dead');    
@@ -147,7 +149,7 @@ AIPlayer.prototype.takeDamage = function (health,emitter) {
 
 AIPlayer.prototype.destroyPlayer = function(emitter){  
   this.explode(emitter);
-  this.aiplayer.kill();
+  this.player.kill();
   socket.emit('remove player');
   setTimeout(function(){ 
     this.game.state.start('dead');    
@@ -156,7 +158,7 @@ AIPlayer.prototype.destroyPlayer = function(emitter){
 
 
 AIPlayer.prototype.explode = function(emitter) {
-    emitter.emit('ship_explosion', this.aiplayer.x, this.aiplayer.y, { total: 32 });
+    emitter.emit('ship_explosion', this.player.x, this.player.y, { total: 32 });
 }
 
 
@@ -168,5 +170,40 @@ AIPlayer.prototype.getShortestAngle = function(angle1, angle2) {
         return (difference - (times * 360)) * -1;
 
 }
+
+
+AIPlayer.prototype.takeDamage = function(health,emitter) {
+  if(health < 1){
+    this.explode(emitter);
+    this.player.kill();  
+    this.weapons.kill();
+  }else{
+    newHealth = health - 10;
+    this.healthbar.setPercent(newHealth) 
+  }   
+}
+
+
+
+AIPlayer.prototype.playerById = function(id) {
+ for (var i = 0; i < enemies.length; i++) {
+    if (enemies[i].player.name === id) {
+      return enemies[i]
+    }
+  }
+  return false
+}
+
+
+AIPlayer.prototype.laserById = function(id) {
+  var i
+  for (i = 0; i < lasers.length; i++) {
+    if (lasers[i].id === id) {
+      return lasers[i]
+    }
+  }
+  return false
+}
+
 
 window.AIPlayer = AIPlayer

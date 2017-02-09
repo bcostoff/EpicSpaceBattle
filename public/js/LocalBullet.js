@@ -60,8 +60,8 @@ Weapon.SingleBullet = function (game) {
   Phaser.Group.call(this, game, game.world, 'Single Bullet', false, true, Phaser.Physics.ARCADE);
 
   this.nextFire = 0;
-  this.bulletSpeed = 600;
-  this.fireRate = 100;
+  this.bulletSpeed = 700;
+  this.fireRate = 300;
 
   for (var i = 0; i < 500; i++){
     this.add(new Bullet(game, 'laser'), true);
@@ -177,7 +177,7 @@ Weapon.SingleCapitalBullet = function (game) {
 
   this.nextFire = 0;
   this.bulletSpeed = 500;
-  this.fireRate = 200;
+  this.fireRate = 300;
 
   for (var i = 0; i < 500; i++){
     this.add(new Bullet(game, 'capital_laser'), true);
