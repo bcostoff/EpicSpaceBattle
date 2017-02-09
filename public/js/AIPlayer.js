@@ -185,25 +185,4 @@ AIPlayer.prototype.takeDamage = function(health,emitter) {
 
 
 
-AIPlayer.prototype.playerById = function(id) {
- for (var i = 0; i < enemies.length; i++) {
-    if (enemies[i].player.name === id) {
-      return enemies[i]
-    }
-  }
-  return false
-}
-
-
-AIPlayer.prototype.laserById = function(id) {
-  var i
-  for (i = 0; i < lasers.length; i++) {
-    if (lasers[i].id === id) {
-      return lasers[i]
-    }
-  }
-  return false
-}
-
-
 window.AIPlayer = AIPlayer
